@@ -11,10 +11,7 @@ from src.api.v1.users.service import (
     update_avatar,
     update_email,
     update_password,
-    verify_user,
 )
-from src.api.v1.verification.schemas import Code
-from src.api.v1.verification.service import expire_code_if_correct
 from src.config import settings
 from src.db.deps import Session
 from src.i18n import gettext as _
@@ -25,17 +22,6 @@ router = APIRouter(prefix="/me")
 
 @router.get("", response_model=CurrentUserResponse)
 def get_current_user(current_user: CurrentUser) -> User:
-    return current_user
-
-
-@router.patch("/verify", response_model=CurrentUserResponse)
-def verify_current_user(current_user: CurrentUser, schema: Code, session: Session) -> User:
-    if current_user.is_verified:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, _("User has already been verified."))
-    if not expire_code_if_correct(current_user.email, schema.code):
-        raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
-
-    verify_user(session, current_user)
     return current_user
 
 

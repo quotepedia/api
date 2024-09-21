@@ -17,10 +17,11 @@ def is_email_registered(session: Session, email: str) -> bool:
     return session.query(exists().where(User.email == email)).scalar()
 
 
-def create_user(session: Session, schema: UserCreate) -> User:
+def register_user(session: Session, schema: UserCreate) -> User:
     user = User(
         email=schema.email,
         password=get_password_hash(schema.password),
+        is_verified=True,
     )
 
     session.add(user)
@@ -28,12 +29,6 @@ def create_user(session: Session, schema: UserCreate) -> User:
     session.refresh(user)
 
     return user
-
-
-def verify_user(session: Session, user: User) -> None:
-    user.is_verified = True
-    session.commit()
-    session.refresh(user)
 
 
 def update_email(session: Session, user: User, new_email: str):

@@ -30,6 +30,8 @@ class UserResponse(BaseModel):
 class UserCreate(UserEmail, UserPassword):
     """Represents user registration details."""
 
+    code: int = Field(ge=settings.otp.min, le=settings.otp.max)
+
 
 class UserPasswordReset(UserEmail, UserPassword):
     """Represents user password reset details"""
