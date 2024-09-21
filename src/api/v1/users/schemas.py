@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, Field
 
-from src.config import settings
+from src.api.v1.schemas import OTP
 
 
 class UserEmail(BaseModel):
@@ -27,13 +27,9 @@ class UserResponse(BaseModel):
     avatar_url: str | None
 
 
-class UserCreate(UserEmail, UserPassword):
+class UserCreate(UserEmail, UserPassword, OTP):
     """Represents user registration details."""
 
-    code: int = Field(ge=settings.otp.min, le=settings.otp.max)
 
-
-class UserPasswordReset(UserEmail, UserPassword):
+class UserPasswordReset(UserEmail, UserPassword, OTP):
     """Represents user password reset details"""
-
-    code: int = Field(ge=settings.otp.min, le=settings.otp.max)

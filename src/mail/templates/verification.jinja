@@ -2,7 +2,7 @@
 
 {% block main %}
 <p>
-  {{ _("Your One-Time Password (OTP) is:") }} <strong>{{ code }}</strong>. {{ _("This code expires at") }}
+  {{ _("Your One-Time Password (OTP) is:") }} <strong>{{ otp }}</strong>. {{ _("This code expires at") }}
   <time datetime="{{ expires_at.strftime('%Y-%m-%dT%H:%M:%SZ') }}">{{ expires_at.strftime('%H:%M') }} UTC</time>.
   {{ _("Don't share it with anyone!") }}
 </p>

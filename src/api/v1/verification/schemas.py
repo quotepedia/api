@@ -1,18 +1,14 @@
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
+from src.api.v1.schemas import OTP
 from src.api.v1.users.schemas import UserEmail
-from src.config import settings
 
 
-class Code(BaseModel):
-    code: int = Field(ge=settings.otp.min, le=settings.otp.max)
-
-
-class CodeVerify(Code, UserEmail):
+class OTPVerify(OTP, UserEmail):
     pass
 
 
-class CodeResponse(BaseModel):
+class OTPResponse(BaseModel):
     expires_at: datetime

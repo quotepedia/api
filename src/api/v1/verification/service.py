@@ -6,47 +6,47 @@ from redis.typing import KeyT, ResponseT
 from src.cache import redis, separate
 from src.config import settings
 
-__CACHE_KEY_PREFIX = "codes"
+__CACHE_KEY_PREFIX = "otp"
 
 
-def set_code(subject: KeyT) -> int:
-    name = generate_code_cache_name(subject)
-    code = generate_random_code()
+def set_otp(subject: KeyT) -> int:
+    name = generate_otp_cache_name(subject)
+    otp = generate_random_otp()
     expires_at = timedelta(minutes=settings.otp.expire_minutes)
 
-    redis.set(name, code, expires_at)
+    redis.set(name, otp, expires_at)
 
-    return code
-
-
-def get_code(subject: KeyT) -> ResponseT:
-    name = generate_code_cache_name(subject)
-    code = redis.get(name)
-
-    return code
+    return otp
 
 
-def expire_code(subject: KeyT) -> ResponseT:
-    name = generate_code_cache_name(subject)
+def get_otp(subject: KeyT) -> ResponseT:
+    name = generate_otp_cache_name(subject)
+    otp = redis.get(name)
+
+    return otp
+
+
+def expire_otp(subject: KeyT) -> ResponseT:
+    name = generate_otp_cache_name(subject)
     response = redis.delete(name)
 
     return response
 
 
-def expire_code_if_correct(subject: KeyT, code: int) -> bool:
-    is_correct = is_code_correct(subject, code)
+def expire_otp_if_correct(subject: KeyT, otp: int) -> bool:
+    is_correct = is_otp_correct(subject, otp)
     if is_correct:
-        expire_code(subject)
+        expire_otp(subject)
     return is_correct
 
 
-def is_code_correct(subject: KeyT, code: int) -> bool:
-    return get_code(subject) == str(code).encode()
+def is_otp_correct(subject: KeyT, otp: int) -> bool:
+    return get_otp(subject) == str(otp).encode()
 
 
-def generate_random_code() -> int:
+def generate_random_otp() -> int:
     return randint(settings.otp.min, settings.otp.max)
 
 
-def generate_code_cache_name(subject: KeyT) -> KeyT:
+def generate_otp_cache_name(subject: KeyT) -> KeyT:
     return separate(__CACHE_KEY_PREFIX, subject)
