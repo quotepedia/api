@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.api.v1 import auth, media, users, otp
+from src.api.v1 import auth, media, otp, users
 
 v1_router = APIRouter(prefix="/v1")
 

@@ -12,5 +12,5 @@ class OTPVerifyRequest(UserEmailRequest, OTPRequest):
 
 class OTPResponse(BaseModel):
     """Represents a response containing One-Time Password (OTP) expiration datetime."""
-    
+
     expires_at: datetime

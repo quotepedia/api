@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException, Response, status
 
-from src.api.v1.users.schemas import UserEmailRequest
 from src.api.v1.otp.mailings import send_verification_message
 from src.api.v1.otp.schemas import OTPResponse, OTPVerifyRequest
 from src.api.v1.otp.service import is_otp_correct
+from src.api.v1.users.schemas import UserEmailRequest
 from src.i18n import gettext as _
 
 router = APIRouter(prefix="/otp", tags=["One-Time Password (OTP)"])
