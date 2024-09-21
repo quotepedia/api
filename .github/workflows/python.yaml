@@ -5,16 +5,16 @@ on:
     branches:
       - main
     paths:
-      - "./src/**"
-      - "./tests/**"
-      - "./.github/workflows/**"
+      - "/src/**"
+      - "/tests/**"
+      - "/.github/workflows/**"
   pull_request:
     branches:
       - main
     paths:
-      - "./src/**"
-      - "./tests/**"
-      - "./.github/workflows/**"
+      - "/src/**"
+      - "/tests/**"
+      - "/.github/workflows/**"
 
 jobs:
   build:
