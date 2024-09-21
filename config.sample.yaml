@@ -13,7 +13,7 @@ path:
   logs: "./logs"
   media: "./media"
   locales: "./src/i18n/locales"
-  templates: "./src/mail/templates"
+  templates: "./src"
 
 jwt:
   secret: "KEY"

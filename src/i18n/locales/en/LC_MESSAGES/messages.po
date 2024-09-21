@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-21 17:40+0300\n"
+"POT-Creation-Date: 2024-09-21 19:48+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Email already registered."
 msgstr ""
 
-#: src/api/v1/auth/routes.py:20 src/api/v1/auth/routes.py:48 src/api/v1/verification/routes.py:15
+#: src/api/v1/auth/routes.py:20 src/api/v1/auth/routes.py:48 src/api/v1/otp/routes.py:15
 msgid "The One-Time Password (OTP) is incorrect or expired."
 msgstr ""
 
@@ -42,6 +42,26 @@ msgstr ""
 msgid "File not found."
 msgstr ""
 
+#: src/api/v1/otp/mailings.py:27
+msgid "Verification"
+msgstr ""
+
+#: src/api/v1/otp/templates/otp.jinja:5
+msgid "Your One-Time Password (OTP) is:"
+msgstr ""
+
+#: src/api/v1/otp/templates/otp.jinja:5
+msgid "This code expires at"
+msgstr ""
+
+#: src/api/v1/otp/templates/otp.jinja:7
+msgid "Don't share it with anyone!"
+msgstr ""
+
+#: src/api/v1/otp/templates/otp.jinja:11
+msgid "In case if you didn't request a code, just ignore this message."
+msgstr ""
+
 #: src/api/v1/users/me/routes.py:31
 msgid "Email is already taken."
 msgstr ""
@@ -59,10 +79,6 @@ msgstr ""
 msgid "Avatar not found."
 msgstr ""
 
-#: src/api/v1/verification/mailings.py:29
-msgid "Verification"
-msgstr ""
-
 #: src/mail/templates/base.jinja:11
 msgid "Dear user,"
 msgstr ""
@@ -70,23 +86,4 @@ msgstr ""
 #: src/mail/templates/base.jinja:19
 msgid "Best regards,"
 msgstr ""
-
-#: src/mail/templates/verification.jinja:5
-msgid "Your One-Time Password (OTP) is:"
-msgstr ""
-
-#: src/mail/templates/verification.jinja:5
-msgid "This code expires at"
-msgstr ""
-
-#: src/mail/templates/verification.jinja:7
-msgid "Don't share it with anyone!"
-msgstr ""
-
-#: src/mail/templates/verification.jinja:11
-msgid "In case if you didn't request a code, just ignore this message."
-msgstr ""
-
-#~ msgid "User has already been verified."
-#~ msgstr ""
 

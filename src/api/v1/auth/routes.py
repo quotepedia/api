@@ -4,7 +4,7 @@ from src.api.v1.auth.deps import PasswordForm
 from src.api.v1.auth.schemas import AccessTokenResponse
 from src.api.v1.users.schemas import UserPasswordResetRequest, UserRegistrationRequest
 from src.api.v1.users.service import get_user_by_email, is_email_registered, register_user, update_password
-from src.api.v1.verification.service import expire_otp_if_correct
+from src.api.v1.otp.service import expire_otp_if_correct
 from src.db.deps import Session
 from src.i18n import gettext as _
 from src.security import create_access_token, is_valid_password
