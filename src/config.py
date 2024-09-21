@@ -17,6 +17,8 @@ class AppSettings(BaseModel):
 
 class ApiSettings(BaseModel):
     max_avatar_size: int
+    min_password_length: int
+    max_password_length: int
 
 
 class PathSettings(BaseModel):

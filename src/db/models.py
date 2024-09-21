@@ -13,12 +13,12 @@ class Base(DeclarativeBase):
     def __tablename__(cls) -> Any:
         return snake(cls.__name__)
 
-    def update(self, schema: dict[str, Any]) -> None:
+    def update(self, args: dict[str, Any]) -> None:
         """Updates model attributes based on the provided schema.
 
         Args:
             schema (dict[str, Any]): A dictionary containing attribute names and their corresponding values.
         """
 
-        for key, value in schema.items():
+        for key, value in args.items():
             setattr(self, key, value)

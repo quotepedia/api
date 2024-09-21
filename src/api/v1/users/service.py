@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.sql import exists
 
 from src.api.v1.users.models import User
-from src.api.v1.users.schemas import UserCreate
+from src.api.v1.users.schemas import UserRegistrationRequest
 from src.security import get_password_hash
 from src.storage import fs
 from src.storage.images import crop_image_to_square
@@ -17,10 +17,10 @@ def is_email_registered(session: Session, email: str) -> bool:
     return session.query(exists().where(User.email == email)).scalar()
 
 
-def register_user(session: Session, schema: UserCreate) -> User:
+def register_user(session: Session, args: UserRegistrationRequest) -> User:
     user = User(
-        email=schema.email,
-        password=get_password_hash(schema.password),
+        email=args.email,
+        password=get_password_hash(args.password),
         is_verified=True,
     )
 

@@ -1,35 +1,40 @@
-from datetime import datetime
-
 from pydantic import BaseModel, EmailStr, Field
 
-from src.api.v1.schemas import OTP
+from src.api.v1.schemas import AuditResponse, OTPRequest
+from src.config import settings
 
 
-class UserEmail(BaseModel):
-    """Represents user with email."""
+class UserEmailRequest(BaseModel):
+    """Represents a request containing a user's e-mail."""
 
-    email: EmailStr = Field(max_length=255)
-
-
-class UserPassword(BaseModel):
-    """Represents user with password."""
-
-    password: str = Field(min_length=8, max_length=128)
+    email: EmailStr
 
 
-class UserResponse(BaseModel):
+class UserPasswordRequest(BaseModel):
+    """Represents a request containing a user's password."""
+
+    password: str = Field(min_length=settings.api.min_password_length, max_length=settings.api.max_password_length)
+
+
+class UserPasswordResetRequest(UserEmailRequest, UserPasswordRequest, OTPRequest):
+    """Represents a request for resetting a user's password."""
+
+
+class UserRegistrationRequest(UserEmailRequest, UserPasswordRequest, OTPRequest):
+    """Represents a request for user registration."""
+
+
+class UserResponse(AuditResponse):
     """Represents the public response data for a user."""
 
+    id: int
+    email: str
+    avatar_url: str | None
     is_active: bool
     is_verified: bool
-    created_at: datetime
-    updated_at: datetime
-    avatar_url: str | None
 
 
-class UserCreate(UserEmail, UserPassword, OTP):
-    """Represents user registration details."""
+class UserExistenceResponse(BaseModel):
+    """Represents a response indicating whether a user exists."""
 
-
-class UserPasswordReset(UserEmail, UserPassword, OTP):
-    """Represents user password reset details"""
+    exists: bool

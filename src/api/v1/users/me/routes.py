@@ -4,7 +4,7 @@ from PIL import Image
 from src.api.v1.users.me.deps import CurrentUser
 from src.api.v1.users.me.schemas import CurrentUserResponse
 from src.api.v1.users.models import User
-from src.api.v1.users.schemas import UserEmail, UserPassword
+from src.api.v1.users.schemas import UserEmailRequest, UserPasswordRequest
 from src.api.v1.users.service import (
     delete_avatar,
     is_email_registered,
@@ -26,17 +26,17 @@ def get_current_user(current_user: CurrentUser) -> User:
 
 
 @router.patch("/email", response_model=CurrentUserResponse)
-def update_current_user_email(current_user: CurrentUser, schema: UserEmail, session: Session) -> User:
-    if is_email_registered(session, schema.email):
+def update_current_user_email(current_user: CurrentUser, args: UserEmailRequest, session: Session) -> User:
+    if is_email_registered(session, args.email):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, _("Email is already taken."))
 
-    update_email(session, current_user, schema.email)
+    update_email(session, current_user, args.email)
     return current_user
 
 
 @router.patch("/password", response_model=CurrentUserResponse)
-def update_current_user_password(current_user: CurrentUser, schema: UserPassword, session: Session) -> User:
-    update_password(session, current_user, schema.password)
+def update_current_user_password(current_user: CurrentUser, args: UserPasswordRequest, session: Session) -> User:
+    update_password(session, current_user, args.password)
     return current_user
 
 

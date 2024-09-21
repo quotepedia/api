@@ -3,8 +3,8 @@ from datetime import datetime
 from pydantic import BaseModel
 
 
-class Token(BaseModel):
-    """JSON payload containing access token."""
+class AccessTokenResponse(BaseModel):
+    """Represents a response containing access token and its expiration datetime."""
 
     access_token: str
     token_type: str = "bearer"
@@ -12,7 +12,7 @@ class Token(BaseModel):
 
 
 class JWT(BaseModel):
-    """Contents of JWT."""
+    """Represents the contents of a [JWT](https://wikipedia.org/wiki/JSON_Web_Token)."""
 
     exp: datetime | None = None
     sub: int | str | None = None
