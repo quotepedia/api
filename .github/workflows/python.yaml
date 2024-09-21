@@ -1,0 +1,36 @@
+name: Python
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "./src/**"
+      - "./tests/**"
+      - "./.github/workflows/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "./src/**"
+      - "./tests/**"
+      - "./.github/workflows/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PDM
+        uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: 3.12
+          cache: true
+
+      - name: Install dependencies
+        run: pdm install
+
+      - name: Lint
+        run: pdm check

@@ -1,0 +1,79 @@
+debug: true
+
+app:
+  name: "Quotepedia"
+  version: "0.0.0"
+
+api:
+  max_avatar_size: 3_145_728 # 3 MB
+
+path:
+  logs: "./logs"
+  media: "./media"
+  locales: "./src/i18n/locales"
+  templates: "./src/mail/templates"
+
+jwt:
+  secret: "KEY"
+  algorithm: "HS256"
+  expire_minutes: 43200 # 30 days
+
+otp:
+  min: 100_000
+  max: 999_999
+  expire_minutes: 10
+
+redis:
+  host: "localhost"
+
+postgres:
+  username: "postgres"
+  password: "root"
+  port: 5432
+  host: "localhost"
+  path: "postgres"
+
+smtp:
+  username: "user@example.com"
+  password: ""
+  port: 587
+  server: "smtp.example.com"
+  starttls: true
+  ssl_tls: false
+  use_credentials: true
+  validate_certs: true
+
+logging:
+  version: 1
+  disable_existing_loggers: false
+  formatters:
+    basic:
+      class: uvicorn.logging.ColourizedFormatter
+      format: "%(levelprefix)s %(message)s"
+    verbose:
+      format: "%(asctime)s %(pathname)s:%(lineno)d %(levelname)s %(message)s"
+      datefmt: "%d.%m.%Y %H:%M:%S"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: basic
+      stream: "ext://sys.stdout"
+    file:
+      class: logging.handlers.TimedRotatingFileHandler
+      formatter: verbose
+      filename: "./logs/app.log"
+      when: D
+      interval: 1
+  loggers:
+    root:
+      level: INFO
+      handlers: 
+        - console
+    app:
+      level: DEBUG
+      handlers:
+        - file
+    sqlalchemy.engine:
+      level: WARNING
+      handlers: 
+        - file

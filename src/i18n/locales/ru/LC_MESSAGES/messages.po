@@ -1,0 +1,99 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-09-14 14:33+0300\n"
+"PO-Revision-Date: 2024-09-08 21:28+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: src/api/v1/auth/routes.py:18
+msgid "Email already registered."
+msgstr "Адрес электронной почты уже зарегистрирован."
+
+#: src/api/v1/auth/routes.py:30 src/api/v1/auth/routes.py:44
+#, fuzzy
+msgid "User not found."
+msgstr "Пользователь не найден."
+
+#: src/api/v1/auth/routes.py:32
+msgid "Inactive user."
+msgstr "Пользователь неактивен"
+
+#: src/api/v1/auth/routes.py:34
+msgid "Incorrect password."
+msgstr "Неверный пароль."
+
+#: src/api/v1/auth/routes.py:46 src/api/v1/users/me/routes.py:36 src/api/v1/verification/routes.py:15
+#, fuzzy
+msgid "The One-Time Password (OTP) is incorrect or expired."
+msgstr "Ваш одноразовый пароль (OTP) неверен или просрочен."
+
+#: src/api/v1/media/routes.py:13
+#, fuzzy
+msgid "File not found."
+msgstr "Файл не найден."
+
+#: src/api/v1/users/me/routes.py:34
+msgid "User has already been verified."
+msgstr "Этот пользователь уже был подтверждён"
+
+#: src/api/v1/users/me/routes.py:45
+#, fuzzy
+msgid "Email is already taken."
+msgstr "Адрес электронной почты уже занят."
+
+#: src/api/v1/users/me/routes.py:63
+#, python-format
+msgid "File size exceeded maximum avatar size: %s MB."
+msgstr "Размер файла превысил максимальный размер аватара: %s Мбайт."
+
+#: src/api/v1/users/me/routes.py:69
+#, fuzzy
+msgid "Unsupported avatar image type. Make sure you're uploading a correct file."
+msgstr "Неподдерживаемый тип изображения аватара. Убедитесь, что вы загружаете правильный файл."
+
+#: src/api/v1/users/me/routes.py:80
+#, fuzzy
+msgid "Avatar not found."
+msgstr "Файл не найден."
+
+#: src/api/v1/verification/mailings.py:29
+msgid "Verification"
+msgstr "Верификация"
+
+#: src/mail/templates/base.jinja:11
+msgid "Dear user,"
+msgstr "Уважаемый пользователь,"
+
+#: src/mail/templates/base.jinja:19
+msgid "Best regards,"
+msgstr "С наилучшими пожеланиями,"
+
+#: src/mail/templates/verification.jinja:5
+msgid "Your One-Time Password (OTP) is:"
+msgstr "Ваш одноразовый пароль (OTP):"
+
+#: src/mail/templates/verification.jinja:5
+msgid "This code expires at"
+msgstr "Этот код истекает в"
+
+#: src/mail/templates/verification.jinja:7
+msgid "Don't share it with anyone!"
+msgstr "Не делитесь им ни с кем!"
+
+#: src/mail/templates/verification.jinja:11
+msgid "In case if you didn't request a code, just ignore this message."
+msgstr "Если вы не запрашивали код, просто проигнорируйте это сообщение."
+
