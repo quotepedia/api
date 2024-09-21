@@ -4,8 +4,8 @@
 .idea/
 
 # App directories
-logs/
-media/
+/logs/
+/media/
 
 # Configuration
 config.yaml
