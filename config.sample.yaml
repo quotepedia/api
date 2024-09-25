@@ -21,7 +21,7 @@ jwt:
   expire_minutes: 43200 # 30 days
 
 otp:
-  min: 100_000
+  min: 000_000
   max: 999_999
   expire_minutes: 10
 
