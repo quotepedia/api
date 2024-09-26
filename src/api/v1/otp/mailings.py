@@ -27,7 +27,7 @@ def generate_verification_message(recipient: str, otp: int, expires_at: datetime
     subject = _("Verification")
 
     context = {
-        "otp": otp,
+        "otp": str(otp).zfill(settings.otp.length),
         "expires_at": expires_at,
         "recipient": recipient,
     }

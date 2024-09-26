@@ -45,6 +45,11 @@ class OTPSettings(BaseModel):
     min: int
     max: int
     expire_minutes: int
+    
+    @computed_field
+    @property
+    def length(self) -> int:
+        return len(str(self.max))
 
 
 class RedisSettings(BaseModel):
