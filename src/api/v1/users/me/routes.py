@@ -30,7 +30,7 @@ def get_current_user(current_user: CurrentUser) -> User:
 def update_current_user_email(current_user: CurrentUser, args: CurrentUserEmailUpdateRequest, session: Session) -> User:
     if is_email_registered(session, args.email):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, _("Email is already taken."))
-    if expire_otp_if_correct(args.email, args.otp):
+    if not expire_otp_if_correct(args.email, args.otp):
         raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
 
     update_email(session, current_user, args.email)
