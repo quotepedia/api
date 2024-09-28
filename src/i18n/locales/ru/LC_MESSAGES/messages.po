@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-21 19:48+0300\n"
+"POT-Creation-Date: 2024-09-28 20:17+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Email already registered."
 msgstr "Адрес электронной почты уже зарегистрирован."
 
-#: src/api/v1/auth/routes.py:20 src/api/v1/auth/routes.py:48 src/api/v1/otp/routes.py:15
+#: src/api/v1/auth/routes.py:20 src/api/v1/auth/routes.py:48 src/api/v1/otp/routes.py:15 src/api/v1/users/me/routes.py:34
 #, fuzzy
 msgid "The One-Time Password (OTP) is incorrect or expired."
 msgstr "Ваш одноразовый пароль (OTP) неверен или просрочен."
@@ -65,22 +65,22 @@ msgstr "Не делитесь им ни с кем!"
 msgid "In case if you didn't request a code, just ignore this message."
 msgstr "Если вы не запрашивали код, просто проигнорируйте это сообщение."
 
-#: src/api/v1/users/me/routes.py:31
+#: src/api/v1/users/me/routes.py:32
 #, fuzzy
 msgid "Email is already taken."
 msgstr "Адрес электронной почты уже занят."
 
-#: src/api/v1/users/me/routes.py:49
+#: src/api/v1/users/me/routes.py:52
 #, python-format
 msgid "File size exceeded maximum avatar size: %s MB."
 msgstr "Размер файла превысил максимальный размер аватара: %s Мбайт."
 
-#: src/api/v1/users/me/routes.py:55
+#: src/api/v1/users/me/routes.py:58
 #, fuzzy
 msgid "Unsupported avatar image type. Make sure you're uploading a correct file."
 msgstr "Неподдерживаемый тип изображения аватара. Убедитесь, что вы загружаете правильный файл."
 
-#: src/api/v1/users/me/routes.py:66
+#: src/api/v1/users/me/routes.py:69
 #, fuzzy
 msgid "Avatar not found."
 msgstr "Файл не найден."

@@ -32,7 +32,7 @@ def register_user(session: Session, args: UserRegistrationRequest) -> User:
 
 
 def update_email(session: Session, user: User, new_email: str):
-    user.is_verified = False
+    user.is_verified = True
     user.email = new_email
     session.commit()
     session.refresh(user)

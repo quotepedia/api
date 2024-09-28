@@ -1,10 +1,11 @@
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from PIL import Image
 
+from src.api.v1.otp.service import expire_otp_if_correct
 from src.api.v1.users.me.deps import CurrentUser
-from src.api.v1.users.me.schemas import CurrentUserResponse
+from src.api.v1.users.me.schemas import CurrentUserEmailUpdateRequest, CurrentUserResponse
 from src.api.v1.users.models import User
-from src.api.v1.users.schemas import UserEmailRequest, UserPasswordRequest
+from src.api.v1.users.schemas import UserPasswordRequest
 from src.api.v1.users.service import (
     delete_avatar,
     is_email_registered,
@@ -26,9 +27,11 @@ def get_current_user(current_user: CurrentUser) -> User:
 
 
 @router.patch("/email", response_model=CurrentUserResponse)
-def update_current_user_email(current_user: CurrentUser, args: UserEmailRequest, session: Session) -> User:
+def update_current_user_email(current_user: CurrentUser, args: CurrentUserEmailUpdateRequest, session: Session) -> User:
     if is_email_registered(session, args.email):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, _("Email is already taken."))
+    if expire_otp_if_correct(args.email, args.otp):
+        raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
 
     update_email(session, current_user, args.email)
     return current_user
