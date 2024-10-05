@@ -99,7 +99,7 @@ pdm run alembic upgrade head
 
 #### Step 3 — Make changes
 
-> ![IMPORTANT]
+> [!IMPORTANT]
 > Please adhere to the code style used throughout the project.
 
 Contributions can vary from simple [`README.md`](README.md) updates to bug fixes or new features. Depending on the nature of your contribution, you may need to follow additional steps outlined below. Focus on the updates you wish to merge into this repository.
