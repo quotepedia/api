@@ -37,7 +37,7 @@ For an overview of current and upcoming tasks for this project, please navigate 
 
 We welcome your contributions to this project! Please read the [`CONTRIBUTING.md`](CONTRIBUTING.md) file to learn more about our process of submitting pull requests and opening issues.
 
-All contributions are moderated under the [**Contributor Covenant Code of Conduct**](https://www.contributor-covenant.org) — see the [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md) file for more information.
+All contributions are moderated under the [**Contributor Covenant Code of Conduct**](https://www.contributor-covenant.org) — see the [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) file for more information.
 
 ## ❤️ Acknowledgments
 
