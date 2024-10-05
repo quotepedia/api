@@ -15,11 +15,11 @@ Every contribution is welcome. First, please read the relevant section before co
 
 ## I have a Question
 
-Before you ask a question, it's best to search for existing [issues](/issues). In case you have found a suitable issue and still need clarification, you can write your question in this issue. It is also advisable to search the internet for answers first.
+Before you ask a question, it's best to search for existing [issues](https://github.com/quotepedia/api/issues). In case you have found a suitable issue and still need clarification, you can write your question in this issue. It is also advisable to search the internet for answers first.
 
 If you then still feel the need to ask a question and need clarification, we recommend the following:
 
-- Open an [issue](/issues/new) with corresponding tags.
+- Open an [issue](https://github.com/quotepedia/api/issues/new) with corresponding tags.
 - Provide as much context as you can about what you're running into.
 - Provide project and platform versions (python, pdm, etc), depending on what seems relevant.
 
@@ -30,7 +30,7 @@ We will then take care of the issue as soon as possible.
 > [!WARNING]
 > You must never report security related issues, vulnerabilities or bugs including sensitive information to the issue tracker, or elsewhere in public. Instead sensitive bugs must be sent to organization members.
 
-We use issues to track bugs and errors. When experiencing issues with this project, please open a [bug report issue](/issues/new?template=bug_report.yaml).
+We use issues to track bugs and errors. When experiencing issues with this project, please open a [bug report issue](https://github.com/quotepedia/api/issues/new?template=bug_report.yaml).
 
 Once it's submitted:
 
@@ -42,7 +42,7 @@ Once it's submitted:
 > [!NOTE]
 > Find out whether your idea fits with the scope and aims of the project. It's up to you to make a strong case to convince the project's developers of the merits of this feature. Keep in mind that we want features that will be useful to the majority of our users and not just a small subset. If you're just targeting a minority of users, consider writing an add-on.
 
-We use issues to track feature requests. To suggest an enhancement, please open a [feature request issue](/issues/new?template=feature_request.yaml).
+We use issues to track feature requests. To suggest an enhancement, please open a [feature request issue](https://github.com/quotepedia/api/issues/new?template=feature_request.yaml).
 
 Once it's submitted:
 
@@ -124,7 +124,7 @@ pdm test
 
 #### Step 7 — Submit a pull request
 
-Once you are satisfied with your changes: [submit a pull request](/compare).
+Once you are satisfied with your changes: [submit a pull request](https://github.com/quotepedia/api/compare).
 
 Your efforts help improve the project for everyone!
 
