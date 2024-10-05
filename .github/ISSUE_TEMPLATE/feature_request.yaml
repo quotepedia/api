@@ -1,0 +1,61 @@
+name: "Feature request"
+
+description: "Suggest an idea for this project"
+
+labels:
+  - enhancement
+
+assignees:
+  - zobweyt
+
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for suggesting an idea! We appreciate your help in improving our product.
+      
+  - type: checkboxes
+    id: existing
+    attributes:
+      label: Search for Existing Issues
+      description: Before requesting a new feature, please ensure you search for existing ones to prevent duplicates.
+      options:
+        - label: I've searched the [issues](https://github.com/quotepedia/api/issues?q=is%3Aissue+sort%3Aupdated).
+          required: true
+        - label: I've searched the [discussions](https://github.com/quotepedia/api/discussions).
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Is your feature request related to a problem? Please describe.
+      description: A clear and concise description of what the problem is.
+      placeholder: I'm always frustrated when…
+    validations:
+      required: true
+
+  - type: input
+    id: solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Describe alternatives you've considered
+      description: A clear and concise description of any alternative solutions or features you've considered.
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Extra Information
+      description: Include any other context about the bug here.
+
+  - type: checkboxes
+    id: conduct
+    attributes:
+      label: Code of Conduct
+      description: The Code of Conduct creates a safe space for everyone. We require that everyone agrees to it.
+      options:
+        - label: I agree this project's [Code of Conduct](https://github.com/quotepedia/api/blob/main/CODE_OF_CONDUCT.md)
+          required: true
