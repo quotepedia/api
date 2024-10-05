@@ -5,11 +5,13 @@ Before opening a PR, please consider the reading the CONTRIBUTING.md in the root
 -->
 
 ### Description
+
 <!--
 A brief explanation of changes made in this PR.
 -->
 
 ### Changes
+
 <!--
 List things changed in this PR.
 
@@ -19,6 +21,7 @@ Example:
 -->
 
 ### Associated Issues
+
 <!--
 List issues that are related to this PR.
 
