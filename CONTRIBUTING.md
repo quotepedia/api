@@ -147,7 +147,7 @@ You can find a complete list of all supported locales [here](src/i18n/locales). 
 
 We have three main i18n scripts defined in [`pyproject.toml`](pyproject.toml) that leverage [Babel's CLI](https://babel.pocoo.org) to manipulate translation messages:
 
-- **Extract**: Creates `messages.pot` (Portable Object Template) from files defined in [`babel.ini`](babel.ini):
+- **Extract**: Creates `messages.pot` (Portable Object Template) using methods defined in [`pyproject.toml`](pyproject.toml):
   ```sh
   pdm i18n:extract
   ```

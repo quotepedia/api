@@ -37,7 +37,7 @@ dev = [
 "check" = "ruff check"
 "format" = "ruff format"
 "i18n:update" = "pybabel update -w 120 -D messages -i 'src\\i18n\\locales\\messages.pot' -d 'src\\i18n\\locales'"
-"i18n:extract" = "pybabel extract -w 120 -F babel.ini -o 'src\\i18n\\locales\\messages.pot' ."
+"i18n:extract" = "pybabel extract -w 120 -F pyproject.toml -o 'src\\i18n\\locales\\messages.pot' ."
 "i18n:compile" = "pybabel compile -f -D messages -d 'src\\i18n\\locales' --statistics"
 
 
@@ -51,3 +51,18 @@ select = [
   "F", # Pyflakes
   "I", # isort
 ]
+
+
+[[tool.babel.mappings]]
+method = "jinja2"
+pattern = "**.jinja"
+
+
+[[tool.babel.mappings]]
+method = "python"
+pattern = "**.py"
+
+
+[[tool.babel.mappings]]
+method = "ignore"
+pattern = ["**/tests/**", "**/migrations/**"]
