@@ -36,7 +36,7 @@ dev = [
 "start" = "uvicorn src.app:app --host 0.0.0.0 --port 8000"
 "check" = "ruff check"
 "format" = "ruff format"
-"i18n:update" = "pybabel update -w 120 -D messages -i 'srci18n/locales/messages.pot' -d 'src/i18n/locales'"
+"i18n:update" = "pybabel update -w 120 -D messages -i 'src/i18n/locales/messages.pot' -d 'src/i18n/locales'"
 "i18n:extract" = "pybabel extract -w 120 -F pyproject.toml -o 'src/i18n/locales/messages.pot' ."
 "i18n:compile" = "pybabel compile -f -D messages -d 'src/i18n/locales' --statistics"
 
