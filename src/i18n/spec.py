@@ -56,7 +56,7 @@ class LanguageTag:
     @cached_property
     def iso_3166(self) -> str:
         """
-        The [ISO 3166](https://wikipedia.org/wiki/ISO_639) part of the tag.
+        The [ISO 3166](https://wikipedia.org/wiki/ISO_3166) part of the tag.
         """
 
         return self._substrings[LANGUAGE_TAG_ISO_3166_INDEX].strip()
