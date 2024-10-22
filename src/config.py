@@ -45,7 +45,7 @@ class OTPSettings(BaseModel):
     min: int
     max: int
     expire_minutes: int
-    
+
     @computed_field
     @property
     def length(self) -> int:
