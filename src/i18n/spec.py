@@ -134,8 +134,8 @@ def get_preferred_iso_639(accept_language: str) -> str:
     Examples:
         >>> get_preferred_iso_639("fr-CH, en;q=0.4, de;q=0.9, ru, *;q=0.5")
         'ru'
-        >>> get_preferred_iso_639("es;q=0.5, fr;q=0.6")
-        'en'  # Default language since 'es' and 'fr' are not supported
+        >>> get_preferred_iso_639("es;q=0.5, fr;q=0.6") # NOTE: 'es' and 'fr' are not supported. 'en' is default.
+        'en'
     """
 
     preferences = [LanguagePreference(raw=preference) for preference in accept_language.split(ACCEPT_LANGUAGE_SEP)]
@@ -153,3 +153,9 @@ __all__ = [
     "LanguagePreference",
     "get_preferred_iso_639",
 ]
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod(verbose=True)
