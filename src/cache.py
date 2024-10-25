@@ -4,7 +4,12 @@ from redis import Redis
 
 from src.config import settings
 
-redis = Redis(settings.redis.host)
+redis = Redis(
+    host=settings.redis.host,
+    port=settings.redis.port,
+    password=settings.redis.password,
+    ssl=settings.redis.ssl,
+)
 
 CACHE_KEYS_SEPARATOR = ":"
 
