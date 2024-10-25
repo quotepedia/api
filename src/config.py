@@ -54,6 +54,9 @@ class OTPSettings(BaseModel):
 
 class RedisSettings(BaseModel):
     host: str
+    port: int
+    password: str
+    ssl: bool
 
 
 class PostgresSettings(BaseModel):
