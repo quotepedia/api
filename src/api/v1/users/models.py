@@ -1,7 +1,13 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from typing import TYPE_CHECKING
+
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.db.mixins import AuditMixin
 from src.db.models import Base
+
+if TYPE_CHECKING:
+    from src.api.v1.collections import Collection
+    from src.api.v1.quotes import Quote
 
 
 class User(Base, AuditMixin):
@@ -11,3 +17,9 @@ class User(Base, AuditMixin):
     avatar_url: Mapped[str | None] = mapped_column(nullable=True)
     is_active: Mapped[bool] = mapped_column(default=True)
     is_verified: Mapped[bool] = mapped_column(default=False)
+
+    quotes: Mapped[list["Quote"]] = relationship(back_populates="created_by_user", cascade="all")
+
+    collections: Mapped[list["Collection"]] = relationship(back_populates="created_by_user", cascade="all")
+
+    __repr_attrs__ = ("id",)

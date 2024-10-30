@@ -4,21 +4,13 @@ from pyheck import snake
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.orm import DeclarativeBase
 
+from src.db.mixins import AttributeUpdaterMixin, ReprMixin
 
-class Base(DeclarativeBase):
+
+class Base(DeclarativeBase, AttributeUpdaterMixin, ReprMixin):
     """Base class for SQLAlchemy models."""
 
     @declared_attr
     @classmethod
     def __tablename__(cls) -> Any:
         return snake(cls.__name__)
-
-    def update(self, args: dict[str, Any]) -> None:
-        """Updates model attributes based on the provided schema.
-
-        Args:
-            schema (dict[str, Any]): A dictionary containing attribute names and their corresponding values.
-        """
-
-        for key, value in args.items():
-            setattr(self, key, value)

@@ -1,7 +1,45 @@
 from datetime import datetime
+from typing import Any, Callable
 
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column
+
+from src.text import truncate
+
+
+class ReprMixin:
+    __repr_attrs__: tuple[str, ...] = tuple()
+
+    __repr__formatters__: dict[type, Callable[[Any], str]] = {
+        str: lambda value: f"'{truncate(value)}'",
+    }
+
+    def __repr__(self) -> str:
+        attrs = map(self.__format_attr, self.__repr_attrs__)
+        return f"{self.__class__.__name__}({', '.join(attrs)})"
+
+    def __format_attr(self, name: str) -> str:
+        value = self.__format_attr_value(getattr(self, name))
+        return f"{name}={value}"
+
+    def __format_attr_value(self, value: object) -> str:
+        formatter = self.__get_attr_formatter(type(value))
+        return formatter(value) if formatter else str(value)
+
+    def __get_attr_formatter(self, _type: type) -> Callable[[Any], str] | None:
+        return self.__repr__formatters__.get(_type)
+
+
+class AttributeUpdaterMixin:
+    def update(self, args: dict[str, Any]) -> None:
+        """Updates model attributes based on the provided args.
+
+        Args:
+            args (dict[str, Any]): A dictionary containing attribute names and their corresponding values.
+        """
+
+        for key, value in args.items():
+            setattr(self, key, value)
 
 
 class AuditMixin:
