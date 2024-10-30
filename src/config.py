@@ -116,6 +116,10 @@ class Settings(BaseSettings):
     smtp: SMTPSettings
     logging: LoggingSettings
 
+    swagger_ui_parameters: dict[typing.Any, typing.Any] = {
+        "persistAuthorization": True,
+    }
+
     @computed_field
     @property
     def MAIL_CONNECTION_CONF(self) -> ConnectionConfig:

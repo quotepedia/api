@@ -16,9 +16,7 @@ app = FastAPI(
     title=settings.app.name,
     version=settings.app.version,
     dependencies=[Depends(get_accept_language)],
-    redoc_url=None,
-    docs_url="/docs" if settings.debug else None,
-    swagger_ui_parameters={"persistAuthorization": True},
+    swagger_ui_parameters=settings.swagger_ui_parameters,
 )
 
 app.mount("/media", StaticFiles(directory=settings.path.media))
