@@ -19,6 +19,7 @@ class ApiSettings(BaseModel):
     max_avatar_size: int
     min_password_length: int
     max_password_length: int
+    max_search_params_limit: int = 100
 
 
 class PathSettings(BaseModel):

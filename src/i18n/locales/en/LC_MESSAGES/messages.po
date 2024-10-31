@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-06 15:45+0300\n"
+"POT-Creation-Date: 2024-10-31 19:03+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,6 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
+
+#: src/api/deps.py:14
+#, python-format
+msgid "The requested search limit of %s exceeds the maximum allowed limit of %s."
+msgstr ""
 
 #: src/api/v1/auth/routes.py:18
 msgid "Email already registered."
@@ -36,6 +41,24 @@ msgstr ""
 
 #: src/api/v1/auth/routes.py:36
 msgid "Incorrect password."
+msgstr ""
+
+#: src/api/v1/authors/routes.py:17
+#, python-format
+msgid "No author found with the name '%s'."
+msgstr ""
+
+#: src/api/v1/authors/routes.py:27
+msgid "No authors found matching the provided search parameters."
+msgstr ""
+
+#: src/api/v1/authors/routes.py:35
+msgid "Author name cannot be an empty string."
+msgstr ""
+
+#: src/api/v1/authors/routes.py:37
+#, python-format
+msgid "An author with the name '%s' already exists."
 msgstr ""
 
 #: src/api/v1/media/routes.py:13
@@ -86,4 +109,10 @@ msgstr ""
 #: src/mail/templates/base.jinja:19
 msgid "Best regards,"
 msgstr ""
+
+#~ msgid "No author found with the name '%s'"
+#~ msgstr ""
+
+#~ msgid "Author name cannot be an empty string"
+#~ msgstr ""
 
