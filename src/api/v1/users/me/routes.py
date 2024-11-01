@@ -39,7 +39,7 @@ def update_current_user_email(current_user: CurrentUser, args: CurrentUserEmailU
 
 @router.patch("/password", response_model=CurrentUserResponse)
 def update_current_user_password(current_user: CurrentUser, args: UserPasswordRequest, session: Session) -> User:
-    update_password(session, current_user, args.password)
+    update_password(session, current_user, args.password.get_secret_value())
     return current_user
 
 

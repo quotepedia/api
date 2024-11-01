@@ -1,4 +1,6 @@
-from pydantic import BaseModel, EmailStr, Field
+from typing import Annotated
+
+from pydantic import BaseModel, EmailStr, SecretStr, StringConstraints
 
 from src.api.v1.schemas import AuditResponse, OTPRequest
 from src.config import settings
@@ -13,7 +15,13 @@ class UserEmailRequest(BaseModel):
 class UserPasswordRequest(BaseModel):
     """Represents a request containing a user's password."""
 
-    password: str = Field(min_length=settings.api.min_password_length, max_length=settings.api.max_password_length)
+    password: Annotated[
+        SecretStr,
+        StringConstraints(
+            min_length=settings.api.min_password_length,
+            max_length=settings.api.max_password_length,
+        ),
+    ]
 
 
 class UserPasswordResetRequest(UserEmailRequest, UserPasswordRequest, OTPRequest):

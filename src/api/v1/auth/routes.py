@@ -47,6 +47,6 @@ def reset_password(args: UserPasswordResetRequest, session: Session) -> AccessTo
     if not expire_otp_if_correct(args.email, args.otp):
         raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
 
-    update_password(session, user, args.password)
+    update_password(session, user, args.password.get_secret_value())
 
     return create_access_token(user.id)

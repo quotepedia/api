@@ -20,7 +20,7 @@ def is_email_registered(session: Session, email: str) -> bool:
 def register_user(session: Session, args: UserRegistrationRequest) -> User:
     user = User(
         email=args.email,
-        password=get_password_hash(args.password),
+        password=get_password_hash(args.password.get_secret_value()),
         is_verified=True,
     )
 
