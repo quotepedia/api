@@ -8,6 +8,8 @@ api:
   max_avatar_size: 3_145_728 # 3 MB
   min_password_length: 8
   max_password_length: 128
+  min_author_name_length: 1
+  max_author_name_length: 32
   max_search_params_limit: 100
 
 path:

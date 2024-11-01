@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-31 19:03+0300\n"
+"POT-Creation-Date: 2024-11-01 15:03+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -53,10 +53,6 @@ msgid "No authors found matching the provided search parameters."
 msgstr ""
 
 #: src/api/v1/authors/routes.py:35
-msgid "Author name cannot be an empty string."
-msgstr ""
-
-#: src/api/v1/authors/routes.py:37
 #, python-format
 msgid "An author with the name '%s' already exists."
 msgstr ""
@@ -109,10 +105,4 @@ msgstr ""
 #: src/mail/templates/base.jinja:19
 msgid "Best regards,"
 msgstr ""
-
-#~ msgid "No author found with the name '%s'"
-#~ msgstr ""
-
-#~ msgid "Author name cannot be an empty string"
-#~ msgstr ""
 
