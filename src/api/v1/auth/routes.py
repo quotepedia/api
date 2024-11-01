@@ -3,9 +3,8 @@ from fastapi import APIRouter, HTTPException, status
 from src.api.v1.auth.deps import PasswordForm
 from src.api.v1.auth.schemas import AccessTokenResponse
 from src.api.v1.otp.service import expire_otp_if_correct
+from src.api.v1.users import UserServiceDepends
 from src.api.v1.users.schemas import UserPasswordResetRequest, UserRegistrationRequest
-from src.api.v1.users.service import get_user_by_email, is_email_registered, register_user, update_password
-from src.db.deps import Session
 from src.i18n import gettext as _
 from src.security import create_access_token, is_valid_password
 
@@ -13,20 +12,21 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
-async def register(args: UserRegistrationRequest, session: Session) -> AccessTokenResponse:
-    if is_email_registered(session, args.email):
+async def register(args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
+    if service.is_email_registered(args.email):
         raise HTTPException(status.HTTP_409_CONFLICT, _("Email already registered."))
     if not expire_otp_if_correct(args.email, args.otp):
         raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
 
-    user = register_user(session, args)
+    user = service.register_user(args)
+
     return create_access_token(user.id)
 
 
 @router.post("/login")
-async def login(form: PasswordForm, session: Session) -> AccessTokenResponse:
+async def login(form: PasswordForm, service: UserServiceDepends) -> AccessTokenResponse:
     email = form.username  # The OAuth2 spec requires the exact name `username`.
-    user = get_user_by_email(session, email)
+    user = service.get_user_by_email(email)
 
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, _("User not found."))
@@ -39,14 +39,14 @@ async def login(form: PasswordForm, session: Session) -> AccessTokenResponse:
 
 
 @router.patch("/reset-password")
-def reset_password(args: UserPasswordResetRequest, session: Session) -> AccessTokenResponse:
-    user = get_user_by_email(session, args.email)
+def reset_password(args: UserPasswordResetRequest, service: UserServiceDepends) -> AccessTokenResponse:
+    user = service.get_user_by_email(args.email)
 
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, _("User not found."))
     if not expire_otp_if_correct(args.email, args.otp):
         raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
 
-    update_password(session, user, args.password.get_secret_value())
+    service.update_password(user, args.password.get_secret_value())
 
     return create_access_token(user.id)
