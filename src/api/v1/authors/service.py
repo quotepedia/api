@@ -6,7 +6,7 @@ from src.db.deps import Session
 
 
 class AuthorService:
-    def __init__(self, session: Session):
+    def __init__(self, session: Session) -> None:
         self.session = session
 
     def get_author(self, name: str) -> Author | None:
