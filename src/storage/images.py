@@ -1,6 +1,6 @@
 """Functions for manipulating images and image files."""
 
-from typing import TypeVar
+from typing import TypeVar, cast
 
 from PIL.Image import Image
 
@@ -29,4 +29,4 @@ def crop_image_to_square(image: TImage) -> TImage:
     bottom = (height + new_side) / 2
     cropped_image = image.crop((left, top, right, bottom))
 
-    return cropped_image
+    return cast(TImage, cropped_image)
