@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 
-from src.api.v1.auth.deps import PasswordForm
+from src.api.v1.auth.deps import OAuth2PasswordRequestFormDepends
 from src.api.v1.auth.schemas import AccessTokenResponse
 from src.api.v1.otp.service import expire_otp_if_correct
 from src.api.v1.users import UserServiceDepends
@@ -24,7 +24,7 @@ async def register(args: UserRegistrationRequest, service: UserServiceDepends) -
 
 
 @router.post("/login")
-async def login(form: PasswordForm, service: UserServiceDepends) -> AccessTokenResponse:
+async def login(form: OAuth2PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:
     email = form.username  # The OAuth2 spec requires the exact name `username`.
     user = service.get_user_by_email(email)
 
