@@ -1,13 +1,13 @@
 from typing import Annotated, Generator
 
 from fastapi import Depends
-from sqlalchemy.orm import Session as __Session
+from sqlalchemy.orm import Session as _Session
 
 from src.db import ENGINE
 
 
-def get_session() -> Generator[__Session, None, None]:
-    session = __Session(ENGINE)
+def get_session() -> Generator[_Session, None, None]:
+    session = _Session(ENGINE)
     try:
         yield session
     except Exception:
@@ -17,4 +17,4 @@ def get_session() -> Generator[__Session, None, None]:
         session.close()
 
 
-Session = Annotated[__Session, Depends(get_session)]
+Session = Annotated[_Session, Depends(get_session)]
