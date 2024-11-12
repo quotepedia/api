@@ -15,18 +15,18 @@ class ReprMixin:
     }
 
     def __repr__(self) -> str:
-        attrs = map(self.__format_attr, self.__repr_attrs__)
+        attrs = map(self._format_attr, self.__repr_attrs__)
         return f"{self.__class__.__name__}({', '.join(attrs)})"
 
-    def __format_attr(self, name: str) -> str:
-        value = self.__format_attr_value(getattr(self, name))
+    def _format_attr(self, name: str) -> str:
+        value = self._format_attr_value(getattr(self, name))
         return f"{name}={value}"
 
-    def __format_attr_value(self, value: object) -> str:
-        formatter = self.__get_attr_formatter(type(value))
+    def _format_attr_value(self, value: object) -> str:
+        formatter = self._get_attr_formatter(type(value))
         return formatter(value) if formatter else str(value)
 
-    def __get_attr_formatter(self, _type: type) -> Callable[[Any], str] | None:
+    def _get_attr_formatter(self, _type: type) -> Callable[[Any], str] | None:
         return self.__repr__formatters__.get(_type)
 
 
