@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Any, Callable
 
+from pydantic import BaseModel
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -31,7 +32,7 @@ class ReprMixin:
 
 
 class AttributeUpdaterMixin:
-    def update(self, args: dict[str, Any]) -> None:
+    def update_from_dict(self, args: dict[str, Any]) -> None:
         """Updates model attributes based on the provided args.
 
         Args:
@@ -40,6 +41,16 @@ class AttributeUpdaterMixin:
 
         for key, value in args.items():
             setattr(self, key, value)
+
+    def update_from_schema(self, schema: BaseModel) -> None:
+        """Updates model attributes based on the provided pydantic model.
+
+        Args:
+            args (BaseModel): A pydantic model containing attribute names and their corresponding values.
+        """
+
+        args = schema.model_dump(exclude_unset=True, exclude_none=True)
+        self.update_from_dict(args)
 
 
 class AuditMixin:
