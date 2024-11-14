@@ -2,7 +2,7 @@ from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from src.api import api_router
+from src.api import router
 from src.config import settings
 from src.i18n.deps import get_accept_language
 from src.i18n.middleware import I18nMiddleware
@@ -27,4 +27,4 @@ app.add_middleware(
 
 app.add_middleware(I18nMiddleware)
 
-app.include_router(api_router)
+app.include_router(router)

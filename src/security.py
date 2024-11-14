@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 import jwt
 from passlib.context import CryptContext
 
-from src.api.v1.auth.schemas import JWT, AccessTokenResponse
+from src.api.auth.schemas import JWT, AccessTokenResponse
 from src.config import settings
 
 __crypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

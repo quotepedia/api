@@ -1,11 +1,17 @@
 from fastapi import APIRouter
 
-from src.api.v1 import v1_router
+from src.api import auth, authors, collections, media, otp, quotes, users
 
-api_router = APIRouter(prefix="/api")
+router = APIRouter()
 
-api_router.include_router(v1_router)
+router.include_router(auth.router)
+router.include_router(authors.router)
+router.include_router(collections.router)
+router.include_router(media.router)
+router.include_router(otp.router)
+router.include_router(quotes.router)
+router.include_router(users.router)
 
 __all__ = [
-    "api_router",
+    "router",
 ]
