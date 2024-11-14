@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-01 15:03+0300\n"
+"POT-Creation-Date: 2024-11-14 15:00+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "The requested search limit of %s exceeds the maximum allowed limit of %s."
 msgstr "Запрашиваемый лимит поиска %s превышает максимально допустимый лимит %s."
 
-#: src/api/v1/auth/routes.py:18
+#: src/api/v1/auth/routes.py:17
 msgid "Email already registered."
 msgstr "Адрес электронной почты уже зарегистрирован."
 
-#: src/api/v1/auth/routes.py:20 src/api/v1/auth/routes.py:48 src/api/v1/otp/routes.py:15 src/api/v1/users/me/routes.py:34
+#: src/api/v1/auth/routes.py:19 src/api/v1/auth/routes.py:48 src/api/v1/otp/routes.py:15 src/api/v1/users/me/routes.py:36
 #, fuzzy
 msgid "The One-Time Password (OTP) is incorrect or expired."
 msgstr "Ваш одноразовый пароль (OTP) неверен или просрочен."
@@ -59,6 +59,24 @@ msgstr "Авторы, соответствующие указанным пара
 msgid "An author with the name '%s' already exists."
 msgstr "Автор с именем '%s' уже существует."
 
+#: src/api/v1/collections/routes.py:18 src/api/v1/collections/routes.py:54 src/api/v1/collections/routes.py:66
+#, fuzzy, python-format
+msgid "No collection found with the ID %s."
+msgstr "Коллекция с идентификатором %s не найдена."
+
+#: src/api/v1/collections/routes.py:24
+msgid "Access denied to this private collection."
+msgstr "Доступ к этой приватной коллекции запрещён."
+
+#: src/api/v1/collections/routes.py:36 src/api/v1/users/me/routes.py:100
+#, fuzzy
+msgid "No collections found matching the provided search parameters."
+msgstr "Коллекции, соответствующие указанным параметрам поиска, не найдены."
+
+#: src/api/v1/collections/routes.py:56 src/api/v1/collections/routes.py:68
+msgid "You do not have permission to modify this collection."
+msgstr "У вас нет права на изменение этой коллекции."
+
 #: src/api/v1/media/routes.py:13
 #, fuzzy
 msgid "File not found."
@@ -84,22 +102,22 @@ msgstr "Не делитесь им ни с кем!"
 msgid "In case if you didn't request a code, just ignore this message."
 msgstr "Если вы не запрашивали код, просто проигнорируйте это сообщение."
 
-#: src/api/v1/users/me/routes.py:32
+#: src/api/v1/users/me/routes.py:34
 #, fuzzy
 msgid "Email is already taken."
 msgstr "Адрес электронной почты уже занят."
 
-#: src/api/v1/users/me/routes.py:52
+#: src/api/v1/users/me/routes.py:64
 #, python-format
 msgid "File size exceeded maximum avatar size: %s MB."
 msgstr "Размер файла превысил максимальный размер аватара: %s Мбайт."
 
-#: src/api/v1/users/me/routes.py:58
+#: src/api/v1/users/me/routes.py:70
 #, fuzzy
 msgid "Unsupported avatar image type. Make sure you're uploading a correct file."
 msgstr "Неподдерживаемый тип изображения аватара. Убедитесь, что вы загружаете правильный файл."
 
-#: src/api/v1/users/me/routes.py:69
+#: src/api/v1/users/me/routes.py:82
 #, fuzzy
 msgid "Avatar not found."
 msgstr "Файл не найден."

@@ -21,6 +21,9 @@ class ApiSettings(BaseModel):
     max_password_length: int
     min_author_name_length: int
     max_author_name_length: int
+    min_collection_name_length: int
+    max_collection_name_length: int
+    max_collection_description_length: int
     max_search_params_limit: int
 
 

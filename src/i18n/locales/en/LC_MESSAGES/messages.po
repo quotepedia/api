@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-01 15:03+0300\n"
+"POT-Creation-Date: 2024-11-14 15:00+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "The requested search limit of %s exceeds the maximum allowed limit of %s."
 msgstr ""
 
-#: src/api/v1/auth/routes.py:18
+#: src/api/v1/auth/routes.py:17
 msgid "Email already registered."
 msgstr ""
 
-#: src/api/v1/auth/routes.py:20 src/api/v1/auth/routes.py:48 src/api/v1/otp/routes.py:15 src/api/v1/users/me/routes.py:34
+#: src/api/v1/auth/routes.py:19 src/api/v1/auth/routes.py:48 src/api/v1/otp/routes.py:15 src/api/v1/users/me/routes.py:36
 msgid "The One-Time Password (OTP) is incorrect or expired."
 msgstr ""
 
@@ -57,6 +57,23 @@ msgstr ""
 msgid "An author with the name '%s' already exists."
 msgstr ""
 
+#: src/api/v1/collections/routes.py:18 src/api/v1/collections/routes.py:54 src/api/v1/collections/routes.py:66
+#, python-format
+msgid "No collection found with the ID %s."
+msgstr ""
+
+#: src/api/v1/collections/routes.py:24
+msgid "Access denied to this private collection."
+msgstr ""
+
+#: src/api/v1/collections/routes.py:36 src/api/v1/users/me/routes.py:100
+msgid "No collections found matching the provided search parameters."
+msgstr ""
+
+#: src/api/v1/collections/routes.py:56 src/api/v1/collections/routes.py:68
+msgid "You do not have permission to modify this collection."
+msgstr ""
+
 #: src/api/v1/media/routes.py:13
 msgid "File not found."
 msgstr ""
@@ -81,20 +98,20 @@ msgstr ""
 msgid "In case if you didn't request a code, just ignore this message."
 msgstr ""
 
-#: src/api/v1/users/me/routes.py:32
+#: src/api/v1/users/me/routes.py:34
 msgid "Email is already taken."
 msgstr ""
 
-#: src/api/v1/users/me/routes.py:52
+#: src/api/v1/users/me/routes.py:64
 #, python-format
 msgid "File size exceeded maximum avatar size: %s MB."
 msgstr ""
 
-#: src/api/v1/users/me/routes.py:58
+#: src/api/v1/users/me/routes.py:70
 msgid "Unsupported avatar image type. Make sure you're uploading a correct file."
 msgstr ""
 
-#: src/api/v1/users/me/routes.py:69
+#: src/api/v1/users/me/routes.py:82
 msgid "Avatar not found."
 msgstr ""
 

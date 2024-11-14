@@ -10,6 +10,9 @@ api:
   max_password_length: 128
   min_author_name_length: 1
   max_author_name_length: 32
+  min_collection_name_length: 2
+  max_collection_name_length: 48
+  max_collection_description_length: 256
   max_search_params_limit: 100
 
 path:

@@ -3,6 +3,9 @@ from typing import Annotated
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from PIL import Image
 
+from src.api.deps import SearchParamsDepends
+from src.api.v1.collections import CollectionServiceDepends
+from src.api.v1.collections.schemas import CollectionResponse
 from src.api.v1.otp.service import expire_otp_if_correct
 from src.api.v1.users.deps import UserServiceDepends
 from src.api.v1.users.me.deps import CurrentUser
@@ -81,3 +84,20 @@ def delete_current_user_avatar(current_user: CurrentUser, service: UserServiceDe
     service.delete_avatar(current_user)
 
     return current_user
+
+
+@router.get("/collections", response_model=list[CollectionResponse], tags=["Collections"])
+def get_current_user_collections(
+    search_params: SearchParamsDepends,
+    current_user: CurrentUser,
+    service: CollectionServiceDepends,
+):
+    collections = service.get_user_collections(current_user.id, search_params)
+
+    if not collections:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND,
+            _("No collections found matching the provided search parameters."),
+        )
+
+    return collections
