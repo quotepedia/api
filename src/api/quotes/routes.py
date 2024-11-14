@@ -4,10 +4,11 @@ from src.api.authors import AuthorServiceDepends
 from src.api.deps import SearchParamsDepends
 from src.api.quotes.deps import QuoteServiceDepends
 from src.api.quotes.schemas import QuoteCollectionsResponse, QuoteCreateRequest, QuoteResponse, QuoteUpdateRequest
+from src.api.tags import Tags
 from src.api.users.me.deps import CurrentUser
 from src.i18n import gettext as _
 
-router = APIRouter(prefix="/quotes", tags=["Quotes"])
+router = APIRouter(prefix="/quotes", tags=[Tags.QUOTES])
 
 
 @router.post("/", response_model=QuoteResponse, status_code=status.HTTP_201_CREATED)

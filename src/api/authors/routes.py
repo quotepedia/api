@@ -3,10 +3,11 @@ from fastapi import APIRouter, HTTPException, status
 from src.api.authors.deps import AuthorServiceDepends
 from src.api.authors.schemas import AuthorCreateRequest, AuthorResponse
 from src.api.deps import SearchParamsDepends
+from src.api.tags import Tags
 from src.api.users.me.deps import CurrentUser
 from src.i18n import gettext as _
 
-router = APIRouter(prefix="/authors", tags=["Authors"])
+router = APIRouter(prefix="/authors", tags=[Tags.AUTHORS])
 
 
 @router.post("/", response_model=AuthorResponse, status_code=status.HTTP_201_CREATED)

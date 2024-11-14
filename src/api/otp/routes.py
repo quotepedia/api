@@ -3,10 +3,11 @@ from fastapi import APIRouter, HTTPException, Response, status
 from src.api.otp.mailings import send_verification_message
 from src.api.otp.schemas import OTPResponse, OTPVerifyRequest
 from src.api.otp.service import is_otp_correct
+from src.api.tags import Tags
 from src.api.users.schemas import UserEmailRequest
 from src.i18n import gettext as _
 
-router = APIRouter(prefix="/otp", tags=["One-Time Password (OTP)"])
+router = APIRouter(prefix="/otp", tags=[Tags.OTP])
 
 
 @router.post("/verify")

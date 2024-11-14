@@ -6,10 +6,11 @@ from src.api.collections.schemas import CollectionCreateRequest, CollectionRespo
 from src.api.deps import SearchParamsDepends
 from src.api.quotes.deps import QuoteServiceDepends
 from src.api.quotes.schemas import QuoteCollectionsResponse, QuoteResponse
+from src.api.tags import Tags
 from src.api.users.me.deps import CurrentUser, CurrentUserOrNone
 from src.i18n import gettext as _
 
-router = APIRouter(prefix="/collections", tags=["Collections"])
+router = APIRouter(prefix="/collections", tags=[Tags.COLLECTIONS])
 
 
 @router.post("/", response_model=CollectionResponse, status_code=status.HTTP_201_CREATED)

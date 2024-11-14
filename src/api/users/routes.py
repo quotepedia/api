@@ -1,9 +1,10 @@
 from fastapi import APIRouter
 
+from src.api.tags import Tags
 from src.api.users.deps import UserServiceDepends
 from src.api.users.schemas import UserEmailRequest, UserExistenceResponse
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(prefix="/users", tags=[Tags.USERS])
 
 
 @router.post("/exists")

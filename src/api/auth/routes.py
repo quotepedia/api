@@ -3,12 +3,13 @@ from fastapi import APIRouter, HTTPException, status
 from src.api.auth.deps import OAuth2PasswordRequestFormDepends
 from src.api.auth.schemas import AccessTokenResponse
 from src.api.otp.service import expire_otp_if_correct
+from src.api.tags import Tags
 from src.api.users import UserServiceDepends
 from src.api.users.schemas import UserPasswordResetRequest, UserRegistrationRequest
 from src.i18n import gettext as _
 from src.security import create_access_token, is_valid_password
 
-router = APIRouter(prefix="/auth", tags=["Authentication"])
+router = APIRouter(prefix="/auth", tags=[Tags.AUTH])
 
 
 @router.post("/login")
