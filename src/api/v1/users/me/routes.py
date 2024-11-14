@@ -7,6 +7,9 @@ from src.api.deps import SearchParamsDepends
 from src.api.v1.collections import CollectionServiceDepends
 from src.api.v1.collections.schemas import CollectionResponse
 from src.api.v1.otp.service import expire_otp_if_correct
+from src.api.v1.quotes.deps import QuoteServiceDepends
+from src.api.v1.quotes.enums import UserQuotesType
+from src.api.v1.quotes.schemas import QuoteResponse
 from src.api.v1.users.deps import UserServiceDepends
 from src.api.v1.users.me.deps import CurrentUser
 from src.api.v1.users.me.schemas import CurrentUserEmailUpdateRequest, CurrentUserResponse
@@ -99,3 +102,21 @@ def get_current_user_collections(
         )
 
     return collections
+
+
+@router.get("/quotes", response_model=list[QuoteResponse], tags=["Quotes"])
+def get_current_user_quotes(
+    service: QuoteServiceDepends,
+    current_user: CurrentUser,
+    search_params: SearchParamsDepends,
+    type: UserQuotesType = UserQuotesType.ALL,
+):
+    quotes = service.get_user_quotes(current_user.id, search_params, type)
+
+    if not quotes:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND,
+            _("No quotes found matching the provided search parameters."),
+        )
+
+    return quotes

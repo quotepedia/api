@@ -3,14 +3,14 @@ from sqlalchemy.sql import exists
 
 from src.api.v1.users.models import User
 from src.api.v1.users.schemas import UserRegistrationRequest
-from src.db.deps import Session
+from src.db.deps import SessionDepends
 from src.security import get_password_hash
 from src.storage import fs
 from src.storage.images import crop_image_to_square
 
 
 class UserService:
-    def __init__(self, session: Session) -> None:
+    def __init__(self, session: SessionDepends) -> None:
         self.session = session
 
     def get_user_by_email(self, email: str) -> User | None:

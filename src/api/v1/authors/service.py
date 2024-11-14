@@ -2,15 +2,18 @@ from sqlalchemy import exists
 
 from src.api.params import SearchParams
 from src.api.v1.authors.models import Author
-from src.db.deps import Session
+from src.db.deps import SessionDepends
 
 
 class AuthorService:
-    def __init__(self, session: Session) -> None:
+    def __init__(self, session: SessionDepends) -> None:
         self.session = session
 
-    def get_author(self, name: str) -> Author | None:
+    def get_author_by_name(self, name: str) -> Author | None:
         return self.session.query(Author).filter(Author.name == name).first()
+
+    def get_author_by_id(self, author_id: int) -> Author | None:
+        return self.session.get(Author, author_id)
 
     def get_authors(self, search_params: SearchParams) -> list[Author]:
         query = self.session.query(Author)

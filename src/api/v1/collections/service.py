@@ -3,11 +3,12 @@ from sqlalchemy.orm import Query
 from src.api.params import SearchParams
 from src.api.v1.collections.models import Collection
 from src.api.v1.collections.schemas import CollectionCreateRequest, CollectionUpdateRequest
-from src.db.deps import Session
+from src.api.v1.quotes.models import Quote
+from src.db.deps import SessionDepends
 
 
 class CollectionService:
-    def __init__(self, session: Session) -> None:
+    def __init__(self, session: SessionDepends) -> None:
         self.session = session
 
     def get_collection(self, id: int) -> Collection | None:
@@ -53,4 +54,20 @@ class CollectionService:
 
     def delete_collection(self, collection: Collection) -> None:
         self.session.delete(collection)
+        self.session.commit()
+
+    def add_quote_to_collection(self, quote: Quote, collection: Collection) -> Quote:
+        collection.quotes.append(quote)
+
+        self.session.add(collection)
+        self.session.commit()
+
+        self.session.refresh(quote)
+
+        return quote
+
+    def remove_quote_from_collection(self, quote: Quote, collection: Collection) -> None:
+        collection.quotes.remove(quote)
+
+        self.session.add(collection)
         self.session.commit()

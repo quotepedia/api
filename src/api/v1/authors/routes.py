@@ -11,7 +11,7 @@ router = APIRouter(prefix="/authors", tags=["Authors"])
 
 @router.get("/{name}", response_model=AuthorResponse)
 def get_author(name: str, service: AuthorServiceDepends):
-    author = service.get_author(name)
+    author = service.get_author_by_name(name)
 
     if not author:
         raise HTTPException(status.HTTP_404_NOT_FOUND, _("No author found with the name '%s'." % (name,)))
