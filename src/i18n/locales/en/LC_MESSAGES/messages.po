@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-14 23:29+0300\n"
+"POT-Creation-Date: 2024-11-15 00:14+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -23,116 +23,126 @@ msgstr ""
 msgid "The requested search limit of %s exceeds the maximum allowed limit of %s."
 msgstr ""
 
-#: src/api/v1/auth/routes.py:17
-msgid "Email already registered."
-msgstr ""
-
-#: src/api/v1/auth/routes.py:19 src/api/v1/auth/routes.py:48 src/api/v1/otp/routes.py:15 src/api/v1/users/me/routes.py:39
-msgid "The One-Time Password (OTP) is incorrect or expired."
-msgstr ""
-
-#: src/api/v1/auth/routes.py:32 src/api/v1/auth/routes.py:46
+#: src/api/auth/routes.py:20 src/api/auth/routes.py:46
 msgid "User not found."
 msgstr ""
 
-#: src/api/v1/auth/routes.py:34
+#: src/api/auth/routes.py:22
 msgid "Inactive user."
 msgstr ""
 
-#: src/api/v1/auth/routes.py:36
+#: src/api/auth/routes.py:24
 msgid "Incorrect password."
 msgstr ""
 
-#: src/api/v1/authors/routes.py:17
-#, python-format
-msgid "No author found with the name '%s'."
+#: src/api/auth/routes.py:32
+msgid "Email already registered."
 msgstr ""
 
-#: src/api/v1/authors/routes.py:27
-msgid "No authors found matching the provided search parameters."
+#: src/api/auth/routes.py:34 src/api/auth/routes.py:48 src/api/otp/routes.py:15 src/api/users/me/routes.py:39
+msgid "The One-Time Password (OTP) is incorrect or expired."
 msgstr ""
 
-#: src/api/v1/authors/routes.py:35
+#: src/api/authors/routes.py:15
 #, python-format
 msgid "An author with the name '%s' already exists."
 msgstr ""
 
-#: src/api/v1/collections/routes.py:20 src/api/v1/collections/routes.py:56 src/api/v1/collections/routes.py:68
-#: src/api/v1/collections/routes.py:86 src/api/v1/collections/routes.py:113 src/api/v1/collections/routes.py:137
+#: src/api/authors/routes.py:25
+#, python-format
+msgid "No author found with the name '%s'."
+msgstr ""
+
+#: src/api/authors/routes.py:35
+msgid "No authors found matching the provided search parameters."
+msgstr ""
+
+#: src/api/collections/routes.py:30 src/api/collections/routes.py:42 src/api/collections/routes.py:54
+#: src/api/collections/routes.py:76 src/api/collections/routes.py:116 src/api/collections/routes.py:142
 #, python-format
 msgid "No collection found with the ID %s."
 msgstr ""
 
-#: src/api/v1/collections/routes.py:26 src/api/v1/collections/routes.py:92 src/api/v1/collections/routes.py:116
-#: src/api/v1/collections/routes.py:140
-msgid "Access denied to this private collection."
-msgstr ""
-
-#: src/api/v1/collections/routes.py:38 src/api/v1/users/me/routes.py:101
-msgid "No collections found matching the provided search parameters."
-msgstr ""
-
-#: src/api/v1/collections/routes.py:58 src/api/v1/collections/routes.py:70
+#: src/api/collections/routes.py:32 src/api/collections/routes.py:44
 msgid "You do not have permission to modify this collection."
 msgstr ""
 
-#: src/api/v1/collections/routes.py:108 src/api/v1/collections/routes.py:132 src/api/v1/quotes/routes.py:18
-#: src/api/v1/quotes/routes.py:50 src/api/v1/quotes/routes.py:62
+#: src/api/collections/routes.py:60 src/api/collections/routes.py:82 src/api/collections/routes.py:121
+#: src/api/collections/routes.py:147
+msgid "Access denied to this private collection."
+msgstr ""
+
+#: src/api/collections/routes.py:94 src/api/users/me/routes.py:101
+msgid "No collections found matching the provided search parameters."
+msgstr ""
+
+#: src/api/collections/routes.py:111 src/api/collections/routes.py:137 src/api/quotes/routes.py:30
+#: src/api/quotes/routes.py:42 src/api/quotes/routes.py:54
 #, python-format
 msgid "No quote found with the ID %s."
 msgstr ""
 
-#: src/api/v1/media/routes.py:13
+#: src/api/collections/routes.py:118
+#, python-format
+msgid "Quote with the ID %s is in collection."
+msgstr ""
+
+#: src/api/collections/routes.py:144
+#, python-format
+msgid "Quote with the ID %s is not in collection."
+msgstr ""
+
+#: src/api/media/routes.py:13
 msgid "File not found."
 msgstr ""
 
-#: src/api/v1/otp/mailings.py:27
+#: src/api/otp/mailings.py:27
 msgid "Verification"
 msgstr ""
 
-#: src/api/v1/otp/templates/otp.jinja:5
+#: src/api/otp/templates/otp.jinja:5
 msgid "Your One-Time Password (OTP) is:"
 msgstr ""
 
-#: src/api/v1/otp/templates/otp.jinja:5
+#: src/api/otp/templates/otp.jinja:5
 msgid "This code expires at"
 msgstr ""
 
-#: src/api/v1/otp/templates/otp.jinja:7
+#: src/api/otp/templates/otp.jinja:7
 msgid "Don't share it with anyone!"
 msgstr ""
 
-#: src/api/v1/otp/templates/otp.jinja:11
+#: src/api/otp/templates/otp.jinja:11
 msgid "In case if you didn't request a code, just ignore this message."
 msgstr ""
 
-#: src/api/v1/quotes/routes.py:28 src/api/v1/users/me/routes.py:119
-msgid "No quotes found matching the provided search parameters."
-msgstr ""
-
-#: src/api/v1/quotes/routes.py:41
+#: src/api/quotes/routes.py:21
 #, python-format
 msgid "No author found with the ID '%s'."
 msgstr ""
 
-#: src/api/v1/quotes/routes.py:52 src/api/v1/quotes/routes.py:64
+#: src/api/quotes/routes.py:32 src/api/quotes/routes.py:44
 msgid "You do not have permission to modify this quote."
 msgstr ""
 
-#: src/api/v1/users/me/routes.py:37
+#: src/api/quotes/routes.py:64 src/api/users/me/routes.py:119
+msgid "No quotes found matching the provided search parameters."
+msgstr ""
+
+#: src/api/users/me/routes.py:37
 msgid "Email is already taken."
 msgstr ""
 
-#: src/api/v1/users/me/routes.py:67
+#: src/api/users/me/routes.py:67
 #, python-format
 msgid "File size exceeded maximum avatar size: %s MB."
 msgstr ""
 
-#: src/api/v1/users/me/routes.py:73
+#: src/api/users/me/routes.py:73
 msgid "Unsupported avatar image type. Make sure you're uploading a correct file."
 msgstr ""
 
-#: src/api/v1/users/me/routes.py:85
+#: src/api/users/me/routes.py:85
 msgid "Avatar not found."
 msgstr ""
 
