@@ -1,6 +1,7 @@
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from scalar_fastapi import get_scalar_api_reference
 
 from src.api import router
 from src.config import settings
@@ -30,3 +31,8 @@ app.add_middleware(
 app.add_middleware(I18nMiddleware)
 
 app.include_router(router)
+
+
+@app.get("/scalar", include_in_schema=False)
+def get_scalar():
+    return get_scalar_api_reference(title=app.title, openapi_url=app.openapi_url) if app.openapi_url else None
