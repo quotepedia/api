@@ -39,7 +39,7 @@ def get_public_collections(search_params: SearchParamsDepends, service: Collecti
     return collections
 
 
-@router.post("/", response_model=CollectionResponse)
+@router.post("/", response_model=CollectionResponse, status_code=status.HTTP_201_CREATED)
 def create_collection(args: CollectionCreateRequest, current_user: CurrentUser, service: CollectionServiceDepends):
     return service.create_collection(args, created_by_user_id=current_user.id)
 
@@ -58,7 +58,7 @@ def update_collection(
     return service.update_collection(collection, args)
 
 
-@router.delete("/{id}")
+@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_collection(id: int, current_user: CurrentUser, service: CollectionServiceDepends):
     collection = service.get_collection(id)
 

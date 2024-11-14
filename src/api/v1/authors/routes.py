@@ -29,7 +29,7 @@ def get_authors(search_params: SearchParamsDepends, service: AuthorServiceDepend
     return authors
 
 
-@router.post("/", response_model=AuthorResponse)
+@router.post("/", response_model=AuthorResponse, status_code=status.HTTP_201_CREATED)
 def create_author(args: AuthorCreateRequest, current_user: CurrentUser, service: AuthorServiceDepends):
     if service.exists(args.name):
         raise HTTPException(status.HTTP_409_CONFLICT, _("An author with the name '%s' already exists." % (args.name,)))

@@ -76,14 +76,12 @@ def update_current_user_avatar(
     return current_user
 
 
-@router.delete("/avatar", response_model=CurrentUserResponse)
+@router.delete("/avatar", status_code=status.HTTP_204_NO_CONTENT)
 def delete_current_user_avatar(current_user: CurrentUser, service: UserServiceDepends):
     if not current_user.avatar_url:
         raise HTTPException(status.HTTP_404_NOT_FOUND, _("Avatar not found."))
 
     service.delete_avatar(current_user)
-
-    return current_user
 
 
 @router.get("/collections", response_model=list[CollectionResponse], tags=["Collections"])
