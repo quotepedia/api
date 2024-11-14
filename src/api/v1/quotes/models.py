@@ -24,4 +24,4 @@ class Quote(Base, AuditMixin):
 
     collections: Mapped[list["Collection"]] = relationship(secondary="quote_collection", back_populates="quotes")
 
-    __repr_attrs__ = ("id", "content", "author")
+    __repr_attrs__ = ("id", "content", "author_id", "created_by_user_id")
