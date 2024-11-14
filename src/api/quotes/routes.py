@@ -10,26 +10,6 @@ from src.i18n import gettext as _
 router = APIRouter(prefix="/quotes", tags=["Quotes"])
 
 
-@router.get("/{quote_id}", response_model=QuoteCollectionsResponse)
-def get_quote(quote_id: int, service: QuoteServiceDepends):
-    quote = service.get_quote_by_id(quote_id)
-
-    if not quote:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, _("No quote found with the ID %s." % (quote_id,)))
-
-    return quote
-
-
-@router.get("/", response_model=list[QuoteResponse])
-def get_quotes(search_params: SearchParamsDepends, service: QuoteServiceDepends):
-    quotes = service.get_quotes(search_params)
-
-    if not quotes:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, _("No quotes found matching the provided search parameters."))
-
-    return quotes
-
-
 @router.post("/", response_model=QuoteResponse, status_code=status.HTTP_201_CREATED)
 def create_quote(
     args: QuoteCreateRequest,
@@ -64,3 +44,23 @@ def delete_quote(quote_id: int, current_user: CurrentUser, service: QuoteService
         raise HTTPException(status.HTTP_403_FORBIDDEN, _("You do not have permission to modify this quote."))
 
     service.delete_quote(quote)
+
+
+@router.get("/{quote_id}", response_model=QuoteCollectionsResponse)
+def get_quote(quote_id: int, service: QuoteServiceDepends):
+    quote = service.get_quote_by_id(quote_id)
+
+    if not quote:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, _("No quote found with the ID %s." % (quote_id,)))
+
+    return quote
+
+
+@router.get("/", response_model=list[QuoteResponse])
+def get_quotes(search_params: SearchParamsDepends, service: QuoteServiceDepends):
+    quotes = service.get_quotes(search_params)
+
+    if not quotes:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, _("No quotes found matching the provided search parameters."))
+
+    return quotes

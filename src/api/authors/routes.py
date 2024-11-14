@@ -9,6 +9,14 @@ from src.i18n import gettext as _
 router = APIRouter(prefix="/authors", tags=["Authors"])
 
 
+@router.post("/", response_model=AuthorResponse, status_code=status.HTTP_201_CREATED)
+def create_author(args: AuthorCreateRequest, current_user: CurrentUser, service: AuthorServiceDepends):
+    if service.exists(args.name):
+        raise HTTPException(status.HTTP_409_CONFLICT, _("An author with the name '%s' already exists." % (args.name,)))
+
+    return service.create_author(name=args.name, created_by_user_id=current_user.id)
+
+
 @router.get("/{name}", response_model=AuthorResponse)
 def get_author(name: str, service: AuthorServiceDepends):
     author = service.get_author_by_name(name)
@@ -27,11 +35,3 @@ def get_authors(search_params: SearchParamsDepends, service: AuthorServiceDepend
         raise HTTPException(status.HTTP_404_NOT_FOUND, _("No authors found matching the provided search parameters."))
 
     return authors
-
-
-@router.post("/", response_model=AuthorResponse, status_code=status.HTTP_201_CREATED)
-def create_author(args: AuthorCreateRequest, current_user: CurrentUser, service: AuthorServiceDepends):
-    if service.exists(args.name):
-        raise HTTPException(status.HTTP_409_CONFLICT, _("An author with the name '%s' already exists." % (args.name,)))
-
-    return service.create_author(name=args.name, created_by_user_id=current_user.id)

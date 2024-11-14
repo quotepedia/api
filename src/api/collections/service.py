@@ -1,7 +1,7 @@
 from sqlalchemy import or_
 from sqlalchemy.orm import Query
 
-from src.api.collections.models import Collection
+from src.api.collections.models import Collection, QuoteCollection
 from src.api.collections.schemas import CollectionCreateRequest, CollectionUpdateRequest
 from src.api.params import SearchParams
 from src.api.quotes.models import Quote
@@ -12,8 +12,8 @@ class CollectionService:
     def __init__(self, session: SessionDepends) -> None:
         self.session = session
 
-    def get_collection(self, id: int) -> Collection | None:
-        return self.session.get(Collection, id)
+    def get_collection(self, collection_id: int) -> Collection | None:
+        return self.session.get(Collection, collection_id)
 
     def get_public_collections(self, search_params: SearchParams) -> list[Collection]:
         query = self.session.query(Collection).filter(Collection.visibility == Collection.Visibility.PUBLIC)
@@ -61,17 +61,16 @@ class CollectionService:
         self.session.commit()
 
     def add_quote_to_collection(self, quote: Quote, collection: Collection) -> Quote:
-        collection.quotes.append(quote)
+        quote_collection = QuoteCollection(quote_id=quote.id, collection_id=collection.id)
 
-        self.session.add(collection)
+        self.session.add(quote_collection)
         self.session.commit()
-
-        self.session.refresh(quote)
 
         return quote
 
     def remove_quote_from_collection(self, quote: Quote, collection: Collection) -> None:
-        collection.quotes.remove(quote)
+        quote_collection = self.session.get(QuoteCollection, {"quote_id": quote.id, "collection_id": collection.id})
 
+        self.session.delete(quote_collection)
         self.session.add(collection)
         self.session.commit()

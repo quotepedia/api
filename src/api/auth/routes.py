@@ -11,18 +11,6 @@ from src.security import create_access_token, is_valid_password
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-@router.post("/register", status_code=status.HTTP_201_CREATED)
-async def register(args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
-    if service.is_email_registered(args.email):
-        raise HTTPException(status.HTTP_409_CONFLICT, _("Email already registered."))
-    if not expire_otp_if_correct(args.email, args.otp):
-        raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
-
-    user = service.register_user(args)
-
-    return create_access_token(user.id)
-
-
 @router.post("/login")
 async def login(form: OAuth2PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:
     email = form.username  # The OAuth2 spec requires the exact name `username`.
@@ -34,6 +22,18 @@ async def login(form: OAuth2PasswordRequestFormDepends, service: UserServiceDepe
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, _("Inactive user."))
     if not is_valid_password(form.password, user.password):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, _("Incorrect password."))
+
+    return create_access_token(user.id)
+
+
+@router.post("/register", status_code=status.HTTP_201_CREATED)
+async def register(args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
+    if service.is_email_registered(args.email):
+        raise HTTPException(status.HTTP_409_CONFLICT, _("Email already registered."))
+    if not expire_otp_if_correct(args.email, args.otp):
+        raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
+
+    user = service.register_user(args)
 
     return create_access_token(user.id)
 

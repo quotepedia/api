@@ -87,7 +87,7 @@ def delete_current_user_avatar(current_user: CurrentUser, service: UserServiceDe
     service.delete_avatar(current_user)
 
 
-@router.get("/collections", response_model=list[CollectionResponse], tags=["Collections"])
+@router.get("/collections", response_model=list[CollectionResponse])
 def get_current_user_collections(
     search_params: SearchParamsDepends,
     current_user: CurrentUser,
@@ -104,7 +104,7 @@ def get_current_user_collections(
     return collections
 
 
-@router.get("/quotes", response_model=list[QuoteResponse], tags=["Quotes"])
+@router.get("/quotes", response_model=list[QuoteResponse])
 def get_current_user_quotes(
     service: QuoteServiceDepends,
     current_user: CurrentUser,
