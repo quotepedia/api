@@ -19,7 +19,7 @@ class GenericSessionFactory(Generic[TQuery]):
         self.query_cls = query_cls
 
     def __call__(self) -> Generator[GenericSession[TQuery], Any, None]:
-        session = GenericSession(bind=ENGINE, query_cls=self.query_cls)
+        session: GenericSession[TQuery] = GenericSession(bind=ENGINE, query_cls=self.query_cls)
 
         try:
             yield session
