@@ -31,8 +31,8 @@ class CollectionService:
         if search_params.q:
             query = query.filter(
                 or_(
-                    Collection.name.ilike(f"%{search_params.q}%"),
-                    Collection.description.ilike(f"%{search_params.q}%"),
+                    Collection.name.icontains(search_params.q),
+                    Collection.description.icontains(search_params.q),
                 )
             )
 

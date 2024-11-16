@@ -28,7 +28,7 @@ class AuthorService:
         query = self.session.query(Author)
 
         if search_params.q:
-            query = query.filter(Author.name.ilike(f"%{search_params.q}%"))
+            query = query.filter(Author.name.icontains(search_params.q))
 
         return query.order_by(Author.name).offset(search_params.offset).limit(search_params.limit).all()
 
