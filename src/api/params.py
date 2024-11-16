@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from src.config import settings
 
 
-@dataclass
+@dataclass(frozen=True, slots=True)
 class SearchParams:
     q: str | None = None
     offset: int = 0
