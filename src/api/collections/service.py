@@ -69,7 +69,7 @@ class CollectionService:
         return quote
 
     def remove_quote_from_collection(self, quote: Quote, collection: Collection) -> None:
-        quote_collection = self.session.get(QuoteCollection, {"quote_id": quote.id, "collection_id": collection.id})
+        quote_collection = self.session.get(QuoteCollection, (quote.id, collection.id))
 
         self.session.delete(quote_collection)
         self.session.add(collection)
