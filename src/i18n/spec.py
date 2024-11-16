@@ -24,7 +24,7 @@ LANGUAGE_PREFERENCE_QUALITY_MAX = 1.0
 ACCEPT_LANGUAGE_SEP = ","
 
 
-@dataclass
+@dataclass(frozen=True)
 class LanguageTag:
     """Represents a language tag consisting of ISO 639 and ISO 3166 components.
 
@@ -62,7 +62,7 @@ class LanguageTag:
         return self._substrings[LANGUAGE_TAG_ISO_3166_INDEX].strip()
 
 
-@dataclass
+@dataclass(frozen=True)
 class LanguagePreference:
     """Represents a language preference from the Accept-Language HTTP header.
 
