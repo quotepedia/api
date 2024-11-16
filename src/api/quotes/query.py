@@ -15,7 +15,7 @@ class QuoteQuery(Query[Quote]):
         if search_params.q:
             self = self.filter(
                 or_(
-                    Quote.content.icontains(search_params.q) |
+                    Quote.content.icontains(search_params.q),
                     Quote.author.has(Author.name.icontains(search_params.q)),
                 )
             )
