@@ -2,7 +2,7 @@ import enum
 from typing import TYPE_CHECKING, Optional
 
 from sqlalchemy import Enum, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, object_session, relationship
 
 from src.db.mixins import AuditMixin
 from src.db.models import Base
@@ -34,5 +34,11 @@ class Collection(Base, AuditMixin):
     created_by_user_id: Mapped[Optional[int]] = mapped_column(ForeignKey("user.id", ondelete="SET NULL"), default=None)
 
     quotes: Mapped[list["Quote"]] = relationship(secondary="quote_collection", back_populates="collections")
+
+    @property
+    def quotes_count(self):
+        from src.api.quotes import Quote
+        session = object_session(self)
+        return session.query(Quote).with_parent(self).count() if session else 0
 
     __repr_attrs__ = ("id", "name", "visibility")

@@ -22,6 +22,7 @@ class CollectionResponse(BaseModel):
     description: str
     emote: str
     visibility: Collection.Visibility
+    quotes_count: int
     created_by_user_id: int
     created_at: datetime
     updated_at: datetime
