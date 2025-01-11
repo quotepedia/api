@@ -18,7 +18,7 @@ def create_quote(
     quote_service: QuoteServiceDepends,
     author_service: AuthorServiceDepends,
 ):
-    if args.author_id and not author_service.get_author_by_id(args.author_id):
+    if args.author_id is not None and not author_service.get_author_by_id(args.author_id):
         raise HTTPException(status.HTTP_404_NOT_FOUND, _("No author found with the ID '%s'." % (args.author_id,)))
     return quote_service.create_quote(args, created_by_user_id=current_user.id)
 
