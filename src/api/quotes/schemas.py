@@ -18,7 +18,7 @@ class QuoteCollectionsResponse(QuoteResponse):
 
 class QuoteCreateRequest(BaseModel):
     content: str
-    author_id: int | None
+    author_id: int | None = None
 
 
 class QuoteUpdateRequest(BaseModel):
