@@ -16,7 +16,7 @@ from src.api.users.me.schemas import CurrentUserEmailUpdateRequest, CurrentUserR
 from src.api.users.models import User
 from src.api.users.schemas import UserPasswordRequest
 from src.config import settings
-from src.i18n import gettext as _
+from src.i18n.deps import Translator
 from src.storage import fs, mimetype
 
 router = APIRouter(prefix="/me")
@@ -29,14 +29,14 @@ def get_current_user(current_user: CurrentUser) -> User:
 
 @router.patch("/email", response_model=CurrentUserResponse)
 def update_current_user_email(
-    args: CurrentUserEmailUpdateRequest,
-    current_user: CurrentUser,
-    service: UserServiceDepends,
+    args: CurrentUserEmailUpdateRequest, current_user: CurrentUser, service: UserServiceDepends, translator: Translator
 ) -> User:
     if service.is_email_registered(args.email):
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, _("Email is already taken."))
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, translator.gettext("Email is already taken."))
     if not expire_otp_if_correct(args.email, args.otp):
-        raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, _("The One-Time Password (OTP) is incorrect or expired."))
+        raise HTTPException(
+            status.HTTP_406_NOT_ACCEPTABLE, translator.gettext("The One-Time Password (OTP) is incorrect or expired.")
+        )
 
     service.update_email(current_user, args.email)
 
@@ -56,21 +56,19 @@ def update_current_user_password(
 
 @router.patch("/avatar", response_model=CurrentUserResponse)
 def update_current_user_avatar(
-    file: Annotated[UploadFile, File()],
-    current_user: CurrentUser,
-    service: UserServiceDepends,
+    file: Annotated[UploadFile, File()], current_user: CurrentUser, service: UserServiceDepends, translator: Translator
 ):
     if not fs.is_size_in_range(file.file, max_size=settings.api.max_avatar_size):
         mb = settings.api.max_avatar_size / (1024 * 1024)
         raise HTTPException(
             status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-            _("File size exceeded maximum avatar size: %s MB.") % (mb,),
+            translator.gettext("File size exceeded maximum avatar size: %s MB.") % (mb,),
         )
 
     if not mimetype.is_image(file.content_type):
         raise HTTPException(
             status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
-            _("Unsupported avatar image type. Make sure you're uploading a correct file."),
+            translator.gettext("Unsupported avatar image type. Make sure you're uploading a correct file."),
         )
 
     image = Image.open(file.file)
@@ -80,9 +78,9 @@ def update_current_user_avatar(
 
 
 @router.delete("/avatar", status_code=status.HTTP_204_NO_CONTENT)
-def delete_current_user_avatar(current_user: CurrentUser, service: UserServiceDepends):
+def delete_current_user_avatar(current_user: CurrentUser, service: UserServiceDepends, translator: Translator):
     if not current_user.avatar_url:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, _("Avatar not found."))
+        raise HTTPException(status.HTTP_404_NOT_FOUND, translator.gettext("Avatar not found."))
 
     service.delete_avatar(current_user)
 
@@ -92,13 +90,14 @@ def get_current_user_collections(
     search_params: SearchParamsDepends,
     current_user: CurrentUser,
     service: CollectionServiceDepends,
+    translator: Translator,
 ):
     collections = service.get_user_collections(current_user.id, search_params)
 
     if not collections:
         raise HTTPException(
             status.HTTP_404_NOT_FOUND,
-            _("No collections found matching the provided search parameters."),
+            translator.gettext("No collections found matching the provided search parameters."),
         )
 
     return collections
@@ -109,6 +108,7 @@ def get_current_user_quotes(
     service: QuoteServiceDepends,
     current_user: CurrentUser,
     search_params: SearchParamsDepends,
+    translator: Translator,
     type: UserQuotesType = UserQuotesType.ALL,
 ):
     quotes = service.get_user_quotes(current_user.id, search_params, type)
@@ -116,7 +116,7 @@ def get_current_user_quotes(
     if not quotes:
         raise HTTPException(
             status.HTTP_404_NOT_FOUND,
-            _("No quotes found matching the provided search parameters."),
+            translator.gettext("No quotes found matching the provided search parameters."),
         )
 
     return quotes

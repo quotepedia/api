@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from functools import cache, cached_property
 from typing import Sequence
 
-from src.i18n import DEFAULT_ISO_639, SUPPORTED_ISO_639
+from src.i18n.constants import DEFAULT_ISO_639, SUPPORTED_ISO_639
 
 LANGUAGE_TAG_SEP = "-"
 LANGUAGE_TAG_ISO_639_INDEX = 0
