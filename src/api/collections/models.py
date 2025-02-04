@@ -38,6 +38,7 @@ class Collection(Base, AuditMixin):
     @property
     def quotes_count(self):
         from src.api.quotes import Quote
+
         session = object_session(self)
         return session.query(Quote).with_parent(self).count() if session else 0
 
