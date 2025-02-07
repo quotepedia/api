@@ -16,6 +16,10 @@ class QuoteCollectionsResponse(QuoteResponse):
     collections: list[CollectionResponse]
 
 
+class QuoteCollectionsUpdateRequest(BaseModel):
+    collection_ids: list[int]
+
+
 class QuoteCreateRequest(BaseModel):
     content: str
     author_id: int | None = None

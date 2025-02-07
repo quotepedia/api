@@ -1,3 +1,4 @@
+from src.api.collections.models import Collection, QuoteCollection
 from src.api.params import SearchParams
 from src.api.quotes.enums import UserQuotesType
 from src.api.quotes.models import Quote
@@ -33,6 +34,44 @@ class QuoteService:
 
     def get_quote_by_id(self, quote_id: int) -> Quote | None:
         return self.session.query(Quote).get(quote_id)
+
+    def get_quote_collection_ids(self, quote_id: int) -> list[int]:
+        query = (
+            self.session.query(QuoteCollection.collection_id).filter(QuoteCollection.quote_id == quote_id).distinct()
+        )
+
+        collection_ids = [collection_id for (collection_id,) in query.all()]  # type: ignore
+
+        return collection_ids
+
+    def bulk_modify_quote_collections(self, quote_id: int, new_collection_ids: list[int]) -> None:
+        current_collection_ids = self.get_quote_collection_ids(quote_id)
+
+        collections_to_remove = set(current_collection_ids) - set(new_collection_ids)
+
+        if collections_to_remove:
+            self.session.query(QuoteCollection).filter(
+                QuoteCollection.quote_id == quote_id, QuoteCollection.collection_id.in_(collections_to_remove)
+            ).delete(synchronize_session=False)
+
+        for collection_id in new_collection_ids:
+            collection_exists = (
+                self.session.query(Collection).filter(Collection.id == collection_id).first() is not None
+            )
+
+            if collection_exists:
+                quote_collection_exists = (
+                    self.session.query(QuoteCollection)
+                    .filter(QuoteCollection.quote_id == quote_id, QuoteCollection.collection_id == collection_id)
+                    .first()
+                    is None
+                )
+
+                if quote_collection_exists:
+                    new_collection = QuoteCollection(quote_id=quote_id, collection_id=collection_id)
+                    self.session.add(new_collection)
+
+        self.session.commit()
 
     def get_quotes(self, search_params: SearchParams) -> list[Quote]:
         return self.session.query(Quote).filter_by_search_params(search_params).all()

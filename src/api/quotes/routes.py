@@ -1,9 +1,15 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Response, status
 
 from src.api.authors import AuthorServiceDepends
 from src.api.deps import SearchParamsDepends
 from src.api.quotes.deps import QuoteServiceDepends
-from src.api.quotes.schemas import QuoteCollectionsResponse, QuoteCreateRequest, QuoteResponse, QuoteUpdateRequest
+from src.api.quotes.schemas import (
+    QuoteCollectionsResponse,
+    QuoteCollectionsUpdateRequest,
+    QuoteCreateRequest,
+    QuoteResponse,
+    QuoteUpdateRequest,
+)
 from src.api.tags import Tags
 from src.api.users.me.deps import CurrentUser
 from src.i18n.deps import Translator
@@ -74,6 +80,44 @@ def get_quote(quote_id: int, service: QuoteServiceDepends, translator: Translato
         )
 
     return quote
+
+
+@router.get("/{quote_id}/collections", response_model=list[int])
+def get_quote_collections(quote_id: int, service: QuoteServiceDepends, translator: Translator):
+    quote = service.get_quote_by_id(quote_id)
+
+    if not quote:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND, translator.gettext("No quote found with the ID %s." % (quote_id,))
+        )
+
+    ids = service.get_quote_collection_ids(quote_id)
+
+    if not ids:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND, translator.gettext("No collections found with the quote ID %s." % (quote_id,))
+        )
+
+    return ids
+
+
+@router.patch("/{quote_id}/collections")
+def update_quote_collections(
+    quote_id: int,
+    service: QuoteServiceDepends,
+    args: QuoteCollectionsUpdateRequest,
+    translator: Translator,
+):
+    quote = service.get_quote_by_id(quote_id)
+
+    if not quote:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND, translator.gettext("No quote found with the ID %s." % (quote_id,))
+        )
+
+    service.bulk_modify_quote_collections(quote_id, args.collection_ids)
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @router.get("/", response_model=list[QuoteResponse])
