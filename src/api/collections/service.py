@@ -17,12 +17,14 @@ class CollectionService:
 
     def get_public_collections(self, search_params: SearchParams) -> list[Collection]:
         query = self.session.query(Collection).filter(Collection.visibility == Collection.Visibility.PUBLIC)
+        query = self._order_collections_query(query)
         query = self._filter_collections_query(query, search_params)
 
         return query.all()
 
     def get_user_collections(self, user_id: int, search_params: SearchParams) -> list[Collection]:
         query = self.session.query(Collection).filter(Collection.created_by_user_id == user_id)
+        query = self._order_collections_query(query)
         query = self._filter_collections_query(query, search_params)
 
         return query.all()
@@ -37,6 +39,9 @@ class CollectionService:
             )
 
         return query.offset(search_params.offset).limit(search_params.limit)
+
+    def _order_collections_query(self, query: Query[Collection]) -> Query[Collection]:
+        return query.order_by(Collection.updated_at.desc())
 
     def create_collection(self, args: CollectionCreateRequest, *, created_by_user_id: int) -> Collection:
         collection = Collection(**args.model_dump(), created_by_user_id=created_by_user_id)
