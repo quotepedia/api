@@ -17,7 +17,7 @@ from src.i18n.deps import Translator
 router = APIRouter(prefix="/quotes", tags=[Tags.QUOTES])
 
 
-@router.get("/random")
+@router.get("/random", response_model=QuoteResponse)
 def get_random_quote(service: QuoteServiceDepends, translator: Translator):
     quote = service.get_random_quote()
 
