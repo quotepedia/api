@@ -17,6 +17,32 @@ from src.i18n.deps import Translator
 router = APIRouter(prefix="/quotes", tags=[Tags.QUOTES])
 
 
+@router.get("/random")
+def get_random_quote(service: QuoteServiceDepends, translator: Translator):
+    quote = service.get_random_quote()
+
+    if not quote:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND,
+            translator.gettext("No quotes found matching the provided search parameters."),
+        )
+
+    return quote
+
+
+@router.get("/", response_model=list[QuoteResponse])
+def get_quotes(search_params: SearchParamsDepends, service: QuoteServiceDepends, translator: Translator):
+    quotes = service.get_quotes(search_params)
+
+    if not quotes:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND,
+            translator.gettext("No quotes found matching the provided search parameters."),
+        )
+
+    return quotes
+
+
 @router.post("/", response_model=QuoteResponse, status_code=status.HTTP_201_CREATED)
 def create_quote(
     args: QuoteCreateRequest,
@@ -118,16 +144,3 @@ def update_quote_collections(
     service.bulk_modify_quote_collections(quote_id, args.collection_ids)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-
-@router.get("/", response_model=list[QuoteResponse])
-def get_quotes(search_params: SearchParamsDepends, service: QuoteServiceDepends, translator: Translator):
-    quotes = service.get_quotes(search_params)
-
-    if not quotes:
-        raise HTTPException(
-            status.HTTP_404_NOT_FOUND,
-            translator.gettext("No quotes found matching the provided search parameters."),
-        )
-
-    return quotes

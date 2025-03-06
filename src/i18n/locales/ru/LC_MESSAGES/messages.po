@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-02-07 22:04+0300\n"
+"POT-Creation-Date: 2025-03-06 12:48+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -79,8 +79,8 @@ msgstr "Доступ к этой приватной коллекции запр�
 msgid "No collections found matching the provided search parameters."
 msgstr "Коллекции, соответствующие указанным параметрам поиска, не найдены."
 
-#: src/api/collections/routes.py:134 src/api/collections/routes.py:167 src/api/quotes/routes.py:47
-#: src/api/quotes/routes.py:63 src/api/quotes/routes.py:79 src/api/quotes/routes.py:91 src/api/quotes/routes.py:115
+#: src/api/collections/routes.py:134 src/api/collections/routes.py:167 src/api/quotes/routes.py:73
+#: src/api/quotes/routes.py:89 src/api/quotes/routes.py:105 src/api/quotes/routes.py:117 src/api/quotes/routes.py:141
 #, fuzzy, python-format
 msgid "No quote found with the ID %s."
 msgstr "Цитата с идентификатором %s не найдена."
@@ -120,25 +120,25 @@ msgstr "Не делитесь им ни с кем!"
 msgid "In case if you didn't request a code, just ignore this message."
 msgstr "Если вы не запрашивали код, просто проигнорируйте это сообщение."
 
-#: src/api/quotes/routes.py:30
+#: src/api/quotes/routes.py:27 src/api/quotes/routes.py:40 src/api/users/me/routes.py:119
+#, fuzzy
+msgid "No quotes found matching the provided search parameters."
+msgstr "Цитаты, соответствующие указанным параметрам поиска, не найдены."
+
+#: src/api/quotes/routes.py:56
 #, fuzzy, python-format
 msgid "No author found with the ID '%s'."
 msgstr "Автор с именем '%s' не найден."
 
-#: src/api/quotes/routes.py:51 src/api/quotes/routes.py:67
+#: src/api/quotes/routes.py:77 src/api/quotes/routes.py:93
 #, fuzzy
 msgid "You do not have permission to modify this quote."
 msgstr "У вас нет права на изменение этой цитаты."
 
-#: src/api/quotes/routes.py:98
+#: src/api/quotes/routes.py:124
 #, fuzzy, python-format
 msgid "No collections found with the quote ID %s."
 msgstr "Коллекции в цитате с идентификатором %s не найдены."
-
-#: src/api/quotes/routes.py:130 src/api/users/me/routes.py:119
-#, fuzzy
-msgid "No quotes found matching the provided search parameters."
-msgstr "Цитаты, соответствующие указанным параметрам поиска, не найдены."
 
 #: src/api/users/me/routes.py:35
 #, fuzzy

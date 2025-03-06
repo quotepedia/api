@@ -1,3 +1,5 @@
+from sqlalchemy.sql.expression import func
+
 from src.api.collections.models import Collection, QuoteCollection
 from src.api.params import SearchParams
 from src.api.quotes.enums import UserQuotesType
@@ -91,3 +93,6 @@ class QuoteService:
             .filter_by_search_params(search_params)
             .all()
         )
+
+    def get_random_quote(self) -> Quote | None:
+        return self.session.query(Quote).order_by(func.random()).limit(1).first()
