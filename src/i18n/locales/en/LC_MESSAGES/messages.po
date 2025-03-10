@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-06 12:48+0300\n"
+"POT-Creation-Date: 2025-03-10 12:27+0300\n"
 "PO-Revision-Date: 2024-09-08 21:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,11 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
-
-#: src/api/deps.py:14
-#, python-format
-msgid "The requested search limit of %s exceeds the maximum allowed limit of %s."
-msgstr ""
 
 #: src/api/auth/routes.py:23 src/api/auth/routes.py:55
 msgid "User not found."
@@ -158,4 +153,7 @@ msgstr ""
 #: src/mail/templates/base.jinja:19
 msgid "Best regards,"
 msgstr ""
+
+#~ msgid "The requested search limit of %s exceeds the maximum allowed limit of %s."
+#~ msgstr ""
 
