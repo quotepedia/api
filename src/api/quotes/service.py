@@ -1,4 +1,4 @@
-from sqlalchemy.sql.expression import func
+from sqlalchemy.sql.expression import func, text
 
 from src.api.collections.models import Collection, QuoteCollection
 from src.api.params import SearchParams
@@ -76,6 +76,9 @@ class QuoteService:
         self.session.commit()
 
     def get_quotes(self, search_params: SearchParams) -> list[Quote]:
+        if not search_params.q:
+            self.session.execute(text(f"SELECT setseed({search_params.seed})"))
+            return self.session.query(Quote).order_by(func.random()).filter_by_search_params(search_params).all()
         return self.session.query(Quote).filter_by_search_params(search_params).all()
 
     def get_user_quotes(self, user_id: int, search_params: SearchParams, type: UserQuotesType) -> list[Quote]:
